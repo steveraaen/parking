@@ -114,9 +114,10 @@ onEachFeature(feature, layer) {
 }
   render() {
     const center = [this.state.lat, this.state.lng];
-
+    console.log(center)
+    console.log(this.props.uloc)
     return (
-      <Map  center={center} zoom={this.state.zoom}> 
+      <Map  center={this.props.uloc} zoom={this.state.zoom}> 
 
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

@@ -32,13 +32,13 @@ export default class Form extends Component {
       {hoodList}
       </select>
         <input></input>
-        <button className="btn btn-default" > Lookup </button>
-        <button className="btn btn-default"  type="submit" id="mon" value="MON" onClick={this.handleClick}> Monday  </button>
-        <button className="btn btn-default"  value="TUE" onClick={this.handleClick}> Tuesday  </button>
-        <button className="btn btn-default"  value="WED" onClick={this.handleClick}> Wednesday  </button>
-        <button className="btn btn-default"  value="THU" onClick={this.handleClick}> Thursday  </button>
-        <button className="btn btn-default"  value="FRI" onClick={this.handleClick}> Friday  </button>
-        <button className="btn btn-default"  value="SAT" onClick={this.handleClick}> Saturday  </button>
+        <button className="btn btn-xs" > Lookup </button>
+        <button className="btn btn-xs"  type="submit" id="mon" value="MON" onClick={this.handleClick}> Monday  </button>
+        <button className="btn btn-xs"  value="TUE" onClick={this.handleClick}> Tuesday  </button>
+        <button className="btn btn-xs"  value="WED" onClick={this.handleClick}> Wednesday  </button>
+        <button className="btn btn-xs"  value="THU" onClick={this.handleClick}> Thursday  </button>
+        <button className="btn btn-xs"  value="FRI" onClick={this.handleClick}> Friday  </button>
+        <button className="btn btn-xs"  value="SAT" onClick={this.handleClick}> Saturday  </button>
           
       </div>
     )
