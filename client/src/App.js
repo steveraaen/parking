@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CMarkers from './CMarkers.js'
-/*import Map from './CMarkers.js'*/
-/*import Form from './Form.js'*/
+import Map from './CMarkers.js'
+import Form from './Form.js'
 import helpers from './helpers.js'
 import day from './time.js'
 
@@ -14,9 +14,9 @@ class App extends Component {
       uloc: null,
       dow: day
     }
-
+  
   }
-  componentWillMount() {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(function(pos){
     var userLoc = []
     userLoc.push(pos.coords.latitude)
@@ -63,7 +63,7 @@ helpers.getHoodNames().then(function(res){
     return (
       <div className="App">
        <div className="header">
-       {/* <Form hoodName={this.state.hoodNames}  />*/}
+        <Form hoodName={this.state.hoodNames}  />
        </div>
         <CMarkers keys={this.state.keys} uloc={this.state.uloc} data={this.state.data} text={this.state.text} hoodName={this.state.hoodName} latlngs={this.state.latlngs}/>
 
