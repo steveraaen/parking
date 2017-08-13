@@ -1,34 +1,30 @@
 const express = require('express');
 const path = require('path');
-const generatePassword = require('password-generator');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 const app = express();
+require("./routes/load-routes.js")(app);
+require("./routes/day-routes.js")(app);
 
-// Serve static files from the React app
+// ------ Setup middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+// ------ Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-
-// Put all API endpoints under '/api'
-app.get('/api/passwords', (req, res) => {
-  const count = 5;
-
-  // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i =>
-    generatePassword(12, false)
-  )
-
-  // Return them as json
-  res.json(passwords);
-
-  console.log(`Sent ${count} passwords`);
+// ------ Connect to the db
+mongoose.connect("mongodb://heroku_5d4vj37d:poartpmu8os1cokg44ajpajpck@ds163679.mlab.com:63679/heroku_5d4vj37d");
+var db = mongoose.connection;
+db.on("error", function(error) {
+    console.log("Mongoose Error: ", error);
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+db.once("open", function() {
+    console.log("Mongoose connection successful.");
 
 const port = process.env.PORT || 5000;
 app.listen(port);
-
-console.log(`Password generator listening on ${port}`);
+console.log(`Listening on ${port}`);
+})

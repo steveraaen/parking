@@ -1,64 +1,90 @@
 import React, { Component } from 'react';
-import './App.css';
+import CMarkers from './CMarkers.js'
+/*import Map from './CMarkers.js'*/
+/*import Form from './Form.js'*/
+import helpers from './helpers.js'
+import day from './time.js'
 
 class App extends Component {
-  // Initialize state
-  state = { passwords: [] }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      hoodNames: null,
+      uloc: null,
+      dow: day
+    }
 
-  // Fetch passwords after first mount
-  componentDidMount() {
-    this.getPasswords();
   }
+  componentWillMount() {
+    navigator.geolocation.getCurrentPosition(function(pos){
+    var userLoc = []
+    userLoc.push(pos.coords.latitude)
+    userLoc.push(pos.coords.longitude)
+    
+    console.log(userLoc)
+    this.setState({ uloc: userLoc})
+        }.bind(this))
 
-  getPasswords = () => {
-    // Get the passwords and store them in state
-    fetch('/api/passwords')
-      .then(res => res.json())
-      .then(passwords => this.setState({ passwords }));
-  }
+// ------------
+helpers.getHoodNames().then(function(res){
+          this.setState({hoodNames: res.data });
+}.bind(this))
+// -----------------------------------------------------
+    helpers.initGeoData().then(function(res) {
+      console.log(res.data)
+        if (res !== this.state.data) {
+          var posArr = res.data.map((coor) => { 
+            return coor.geometry.coordinates 
+            })
+          var textArr = res.data.map((text) => {
+            return text.properties.T
+            })
+          var keyArr = res.data.map((k, idx) => {
+            return 'k_' + idx
+            })
+          var geoArr = res.data.map((geo) => {
+            return geo
+          })}
+        this.setState({ keys: keyArr,
+                        data: res.data,
+                        text: textArr
+        })
+      }.bind(this))
+}
+/*  setDay(value) {
+    this.setState = ({
+      dayow: this.state.dow
+    })
+  } */
 
   render() {
-    const { passwords } = this.state;
-
+    
     return (
       <div className="App">
-        {/* Render the passwords if we have them */}
-        {passwords.length ? (
-          <div>
-            <h1>5 Passwords.</h1>
-            <ul className="passwords">
-              {/*
-                Generally it's bad to use "index" as a key.
-                It's ok for this example because there will always
-                be the same number of passwords, and they never
-                change positions in the array.
-              */}
-              {passwords.map((password, index) =>
-                <li key={index}>
-                  {password}
-                </li>
-              )}
-            </ul>
-            <button
-              className="more"
-              onClick={this.getPasswords}>
-              Get More
-            </button>
-          </div>
-        ) : (
-          // Render a helpful message otherwise
-          <div>
-            <h1>No passwords :(</h1>
-            <button
-              className="more"
-              onClick={this.getPasswords}>
-              Try Again?
-            </button>
-          </div>
-        )}
+       <div className="header">
+       {/* <Form hoodName={this.state.hoodNames}  />*/}
+       </div>
+        <CMarkers keys={this.state.keys} uloc={this.state.uloc} data={this.state.data} text={this.state.text} hoodName={this.state.hoodName} latlngs={this.state.latlngs}/>
+
       </div>
     );
   }
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

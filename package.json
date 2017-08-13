@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "password-generator": "^2.1.0"
+    "mongoose": "^4.11.6"
   },
-"scripts": {
-  "start": "node index.js",
-  "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
-}
+  "scripts": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
+  }
 }
