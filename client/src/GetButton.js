@@ -17,8 +17,21 @@ componentWillMount() {
   handleClick(e) {
     e.preventDefault()
 
-     helpers.test(e.target.value)
-      console.log(e.target.value)
+    helpers.test(e.target.value).then(function(res) {
+      console.log(res.data)
+        if (res !== this.state.data) {
+          var textArr = res.data.map((text) => {
+            return text.properties.T
+            })
+          var keyArr = res.data.map((k, idx) => {
+            return 'k_' + idx
+            })
+}
+        this.setState({ keys: keyArr,
+                        data: res.data,
+                        text: textArr
+        })
+      }.bind(this))
       
     }
   render() {
