@@ -10,8 +10,8 @@ class App extends Component {
     this.state = {
       hoodNames: null,
       uloc: null,
-      lat: null,
-      lng: null,
+      lat: "",
+      lng: "",
       dow: day
     }
   

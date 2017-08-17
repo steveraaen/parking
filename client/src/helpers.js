@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-
-
 var helpers = {
     getHoodNames: function() {
         return axios.get('/hoodnames')
@@ -28,10 +26,7 @@ var helpers = {
         return axios.get('/sat')
     },
     test: function(uloc) {
-
-        console.log(uloc)
         return axios.get('/test', { params: { coordinates: uloc } })
-
     }
 }
 

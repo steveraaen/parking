@@ -6,21 +6,25 @@ module.exports = function(app) {
 // ---------------- test
 app.get('/test/', function(req, res) {
  console.log(Array.isArray(req.query.coordinates));
- console.log(req.query.coordinates);
+ console.log(req.query);
 
  function doit() {
     console.log(req.query.coordinates)
-    var c1 = req.query.coordinates.split(',')
+    var c1 = req.query.coordinates;
+    var c2= c1.split(",")
     console.log(c1)
-    var coords = c1.map((ll) => {
+    var coords = c2.map((ll) => {
+
         return parseFloat(ll)
+
     })
+    console.log(coords[0])
  allsigns.find({
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: coords
+                        coordinates: [coords[0], coords[1]]
                     },
                     $maxDistance: 750
                 }
@@ -35,6 +39,7 @@ app.get('/test/', function(req, res) {
         }).limit(5000);
 }
 doit()
+
 })
 
 
