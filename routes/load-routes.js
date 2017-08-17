@@ -4,13 +4,14 @@ var allsigns = require("../models/Allsigns.js");
 module.exports = function(app) {
 
     // ---------------------------------------------------
-    app.get("/allsigns", function(req, res) {
+    app.get("/allsigns/:coordinates?", function(req, res) {
+        var initCoords = [-73.982907, 40.675645]
         allsigns.find({
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: initCoords
                     },
                     $maxDistance: 750
                 }

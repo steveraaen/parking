@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, TileLayer,  Tooltip, GeoJSON} from 'react-leaflet'
+import { Map, TileLayer,  GeoJSON} from 'react-leaflet'
 import L from 'leaflet'
 
 export default class CMarkers extends Component {
@@ -11,6 +11,9 @@ export default class CMarkers extends Component {
       lng: -73.983907,
       zoom: 16
   }
+  GeoJSON.propTypes = {
+  
+}
   }
 
 pointToLayer(feature, latlng) {
@@ -115,9 +118,8 @@ onEachFeature(feature, layer) {
   render() {
     const center = [this.state.lat, this.state.lng];
     console.log(center)
-    console.log(this.props.uloc)
     return (
-      <Map  center={this.props.uloc} zoom={this.state.zoom}> 
+      <Map  center={center} zoom={this.state.zoom}> 
 
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

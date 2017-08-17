@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import CMarkers from './CMarkers.js'
-import Map from './CMarkers.js'
-/*import Form from './Form.js'*/
+import GeoJSON from './CMarkers.js'
+import GetButton from './GetButton.js'
 import helpers from './helpers.js'
 import day from './time.js'
 
@@ -9,54 +8,50 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
       hoodNames: null,
       uloc: null,
+      lat: null,
+      lng: null,
       dow: day
     }
   
   }
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(function(pos){
+  componentWillMount(){
+
+   navigator.geolocation.watchPosition(function(pos){
+    console.log(navigator)
     var userLoc = []
     userLoc.push(pos.coords.latitude)
     userLoc.push(pos.coords.longitude)
-    
-    console.log(userLoc)
-    this.setState({ uloc: userLoc})
+    this.setState({ lat: pos.coords.latitude,
+                    lng: pos.coords.longitude,
+                    uloc: [pos.coords.longitude, pos.coords.latitude]
+    })
         }.bind(this))
+  }
 
-// ------------
+  componentDidMount() {
 helpers.getHoodNames().then(function(res){
           this.setState({hoodNames: res.data });
 }.bind(this))
 // -----------------------------------------------------
+
     helpers.initGeoData().then(function(res) {
       console.log(res.data)
         if (res !== this.state.data) {
-          var posArr = res.data.map((coor) => { 
-            return coor.geometry.coordinates 
-            })
           var textArr = res.data.map((text) => {
             return text.properties.T
             })
           var keyArr = res.data.map((k, idx) => {
             return 'k_' + idx
             })
-          var geoArr = res.data.map((geo) => {
-            return geo
-          })}
+}
         this.setState({ keys: keyArr,
                         data: res.data,
                         text: textArr
         })
       }.bind(this))
 }
-/*  setDay(value) {
-    this.setState = ({
-      dayow: this.state.dow
-    })
-  } */
 
   render() {
     
@@ -64,9 +59,9 @@ helpers.getHoodNames().then(function(res){
       <div className="App">
        <div className="header">
 {/*        <Form hoodName={this.state.hoodNames}  />*/}
+        <GetButton  lat={this.state.lat} lng={this.state.lng} />
        </div>
-        <CMarkers keys={this.state.keys} uloc={this.state.uloc} data={this.state.data} text={this.state.text} hoodName={this.state.hoodName} latlngs={this.state.latlngs}/>
-
+        <GeoJSON data={this.state.data} keys={this.state.keys} text={this.state.text} hoodName={this.state.hoodName} latlngs={this.state.latlngs}/>
       </div>
     );
   }
