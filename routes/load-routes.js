@@ -13,7 +13,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: initCoords
                     },
-                    $maxDistance: 750
+                    $maxDistance: 1000
                 }
             }
         }, function(error, doc) {
@@ -22,7 +22,7 @@ module.exports = function(app) {
             } else {
                 res.json(doc);
             }
-        }).limit(5000);
+        }).limit(1000);
     });
     // ---------------------------------------------------
     app.get("/allwithin", function(req, res) {
@@ -40,7 +40,7 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+                /*console.log(doc)*/
                 res.json(doc);
             }
         }).limit(100);
@@ -56,12 +56,12 @@ module.exports = function(app) {
         });
     });
 // ------------------ get neighborhoods ----------------------
-    app.get("/hoods/", function(req, res) {
+    app.get("/allhoods/", function(req, res) {
         Hood.find({}, function(error, doc) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+              /*  console.log(doc)*/
                 res.json(doc);
             }
         });
@@ -72,8 +72,9 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
-                res.json(doc);
+                
+                console.log(doc[0])
+                res.json(doc[0]);
             }
         });
     });

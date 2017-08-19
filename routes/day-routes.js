@@ -5,7 +5,7 @@ module.exports = function(app) {
 
 // ---------------- test
 app.get('/test/', function(req, res) {
- console.log(Array.isArray(req.query.coordinates));
+
  console.log(req.query);
 
  function doit() {
@@ -41,8 +41,6 @@ app.get('/test/', function(req, res) {
 doit()
 
 })
-
-
     // ---------- Monday
     app.get("/mon", function(req, res) {
         allsigns.find({
@@ -53,7 +51,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -63,7 +61,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
     // ---------- Tuesday
     app.get("/tue", function(req, res) {
@@ -75,7 +73,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -85,7 +83,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
     // ---------- Wednesday
     app.get("/wed", function(req, res) {
@@ -97,7 +95,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -107,7 +105,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
     // ----------- Thursday
     app.get("/thu", function(req, res) {
@@ -119,7 +117,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -129,7 +127,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
     // ---------- Friday
     app.get("/fri", function(req, res) {
@@ -141,7 +139,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -151,7 +149,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
     // ---------- Saturday
     app.get("/sat", function(req, res) {
@@ -163,7 +161,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -173,7 +171,7 @@ doit()
                 console.log(doc)
                 res.json(doc);
             }
-        }).limit(500);
+        }).limit(1000);
     });
 }
 
