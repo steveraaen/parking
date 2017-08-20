@@ -1,8 +1,8 @@
 import axios from 'axios'
-import moment from 'moment'
+/*import moment from 'moment'
 
 var date = moment();
-var dow = date.day();
+var dow = date.day();*/
 
 var helpers = {
 

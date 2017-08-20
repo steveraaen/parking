@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, Polygon, GeoJSON, LayersControl, LayerGroup} from 'react-leaflet'
+import { Map, TileLayer, GeoJSON, LayersControl, LayerGroup} from 'react-leaflet'
 import L from 'leaflet'
 const { BaseLayer, Overlay } = LayersControl
 
@@ -127,10 +127,11 @@ onEachFeature(feature, layer) {
         <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
         </BaseLayer>
+        <Overlay name="Signs">
           <LayerGroup checked name="All signs">
-          <GeoJSON key={this.props.keys} data={this.props.data}  children={this.props.text} pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />
-
+          <GeoJSON key={this.props.keys} data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />
           </LayerGroup>
+        </Overlay>
         </LayersControl>
       </Map>
     )
