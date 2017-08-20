@@ -5,27 +5,12 @@ var date = moment();
 var dow = date.day();
 
 var helpers = {
-    today: function() {
 
-    if (dow === 0) {
-        return axios.get('/sun')
-    } else if (dow === 1) {
-        return axios.get('/mon')
-    } else if (dow === 2) {
-        return axios.get('/tue')
-    } else if (dow === 3) {
-        return axios.get('/wed')
-    } else if (dow === 4) {
-        return axios.get('/thu')
-    } else if (dow === 5) {
-        return axios.get('/fri')
-    } else if (dow === 6) {
-        return axios.get('/sat')
-    }
-},
     initGeoData: function() {
-        console.log(dow)
         return axios.get('/allsigns')
+    },
+    initAutoGeoData: function(uloc) {
+        return axios.get('/allsigns', { params: { coordinates: uloc } })
     },
     getAllHoods: function() {
         return axios.get('/allhoods')

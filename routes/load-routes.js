@@ -5,13 +5,13 @@ module.exports = function(app) {
 
     // ---------------------------------------------------
     app.get("/allsigns/:coordinates?", function(req, res) {
-        var initCoords = [-73.982907, 40.675645]
+        var coords = [-73.982907, 40.675645]
         allsigns.find({
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: initCoords
+                        coordinates: coords
                     },
                     $maxDistance: 1000
                 }

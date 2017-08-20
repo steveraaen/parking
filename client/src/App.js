@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CMarkers from './CMarkers.js'
 import GetButton from './GetButton.js'
 import helpers from './helpers.js'
-
+import day from './time.js'
 
 class App extends Component {
   constructor(props) {
@@ -11,11 +11,12 @@ class App extends Component {
       hoodNames: null,
       uloc: null,
       lat: "",
-      lng: ""
+      lng: "",
+      dow: day
     }
   
   }
-  componentDidMount(){
+  componentWillMount(){
 
    navigator.geolocation.watchPosition(function(pos){
     console.log(navigator)
@@ -53,11 +54,9 @@ class App extends Component {
           })
           
     }.bind(this)) 
-// ------------------------------------------
-
-
-    helpers.today().then(function(res) {
-     /* console.log(res.data)*/
+}
+componentDidMount() {
+  helpers.initAutoGeoData(this.state.uloc).then(function(res) {
         if (res !== this.state.data) {
           var textArr = res.data.map((text) => {
             return text.properties.T
@@ -71,18 +70,33 @@ class App extends Component {
                         text: textArr
         })
       }.bind(this))
-}
 
+/*    helpers.initGeoData().then(function(res) {
+        if (res !== this.state.data) {
+          var textArr = res.data.map((text) => {
+            return text.properties.T
+            })
+          var keyArr = res.data.map((k, idx) => {
+            return 'k_' + idx
+            })
+}
+        this.setState({ keys: keyArr,
+                        data: res.data,
+                        text: textArr
+        })
+      }.bind(this))*/
+}
   render() {
     
     return (
       <div className="App">
        <div className="header">
+}
 {/*        <Form hoodName={this.state.hoodNames}  />*/}
         <GetButton  uloc={this.state.uloc} lat={this.state.lat} lng={this.state.lng} />
        </div>
        <div>
-        <CMarkers data={this.state.data} keys={this.state.keys} latLngList={this.state.latLngList} text={this.state.text} uloc={this.state.uloc} positions={this.state.allHoods} />
+        <CMarkers data={this.state.data} keys={this.state.keys} latLngList={this.state.latLngList}  uloc={this.state.uloc} positions={this.state.allHoods} />
       </div>
       <div> 
       

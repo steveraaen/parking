@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, Polygon, GeoJSON, LayersControl} from 'react-leaflet'
+import { Map, TileLayer, Polygon, GeoJSON, LayersControl, LayerGroup} from 'react-leaflet'
 import L from 'leaflet'
 const { BaseLayer, Overlay } = LayersControl
 
@@ -8,11 +8,9 @@ export default class CMarkers extends Component {
   constructor(props) {
     super(props) ; 
       this.state = {
-      uloc: this.props.uloc,
       lat: 40.656645,
       lng: -73.963907,
-      zoom: 15,
-      polygon: this.props.polygon
+      zoom: 15
   }
   GeoJSON.propTypes = { 
 }
@@ -112,10 +110,16 @@ onEachFeature(feature, layer) {
         layer.bindTooltip(feature.properties.T);
     }
 }
+  handleChange(event) {
+    this.setState({value: this.props.uloc});
+  }
   render() {
     var center = [this.state.lat, this.state.lng];
-
-
+    
+    if(this.props.uloc) {
+      console.log(this.props.uloc[0])
+      center = [this.props.uloc[1],this.props.uloc[0]]
+    }
     return (
       <Map  center={center} zoom={this.state.zoom}> 
        <LayersControl position="topright">
@@ -123,9 +127,10 @@ onEachFeature(feature, layer) {
         <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
         </BaseLayer>
-          <Overlay checked name="All signs">
-            <GeoJSON key={this.props.keys} data={this.props.data}  children={this.props.text} pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />
-          </Overlay>
+          <LayerGroup checked name="All signs">
+          <GeoJSON key={this.props.keys} data={this.props.data}  children={this.props.text} pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />
+
+          </LayerGroup>
         </LayersControl>
       </Map>
     )
