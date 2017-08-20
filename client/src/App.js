@@ -90,11 +90,6 @@ componentDidMount() {
     
     return (
       <div className="App">
-       <div className="header">
-}
-{/*        <Form hoodName={this.state.hoodNames}  />*/}
-        <GetButton  uloc={this.state.uloc} lat={this.state.lat} lng={this.state.lng} />
-       </div>
        <div>
         <CMarkers data={this.state.data} keys={this.state.keys} latLngList={this.state.latLngList}  uloc={this.state.uloc} positions={this.state.allHoods} />
       </div>
