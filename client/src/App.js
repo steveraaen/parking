@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CMarkers from './CMarkers.js'
+import Form from './Form.js'
 import GetButton from './GetButton.js'
 import helpers from './helpers.js'
 import day from './time.js'
@@ -34,7 +35,8 @@ class App extends Component {
     }.bind(this))
 // -----------------------------------------------------
     helpers.getAllHoods().then(function(resp) {
-     /* console.log(resp.data)*/
+      
+
           this.setState({
             allHoods: resp.data
         })
@@ -90,12 +92,13 @@ componentDidMount() {
     
     return (
       <div className="App">
+            <div> 
+        {/*<Form hoodNames={this.state.hoodNames} />*/}
+      </div>
        <div>
-        <CMarkers data={this.state.data} keys={this.state.keys} latLngList={this.state.latLngList}  uloc={this.state.uloc} positions={this.state.allHoods} />
-      </div>
-      <div> 
-      
-      </div>
+       <CMarkers data={this.state.data} keys={this.state.keys} oneHood={this.state.oneHood} allHoods={this.state.allHoods} latLngList={this.state.latLngList}  uloc={this.state.uloc}  />
+    </div>
+
       </div>
       );
   }

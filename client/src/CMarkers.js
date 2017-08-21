@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, GeoJSON, LayersControl, LayerGroup} from 'react-leaflet'
+import { Map, TileLayer, GeoJSON, LayersControl, Polygon} from 'react-leaflet'
 import L from 'leaflet'
+import BigMap from './BigMap.js'
 const { BaseLayer, Overlay } = LayersControl
 
 export default class CMarkers extends Component {
@@ -10,10 +11,18 @@ export default class CMarkers extends Component {
       this.state = {
       lat: 40.656645,
       lng: -73.963907,
-      zoom: 15
+      zoom: 16
   }
   GeoJSON.propTypes = { 
 }
+  Polygon.propTypes = { 
+}
+  }
+
+  componentDidUpdate() {
+    const map = this.refs.map.leafletElement
+    map.panTo([this.props.userLoc[1], this.props.userLoc[0]] )
+    console.log(typeof(this.props.userLoc[0]))
   }
 pointToLayer(feature, latlng) {
     var geojsonMarkerOptions = {
@@ -100,39 +109,37 @@ else if (feature.properties.T.includes('SAT')){
 } 
 else if (feature.properties.T.includes('SUN')){
   return L.circleMarker(latlng, geojsonMarkerSunday);
-} 
+}
+else if (feature.properties.T.includes('SUN')){
+  return L.circleMarker(latlng, geojsonMarkerSunday);
+}  
 else {
   return L.circleMarker(latlng, geojsonMarkerOptions);
 }
 }
+
 onEachFeature(feature, layer) {  
     if (feature.properties && feature.properties.T) {
         layer.bindTooltip(feature.properties.T);
     }
 }
   handleChange(event) {
-    this.setState({value: this.props.uloc});
+    this.setState({value: this.props.userLoc});
   }
+/*  sendPoly(props) {
+    return <Polygon color="white" positions={this.props.latLngList} />   
+  }*/
   render() {
     var center = [this.state.lat, this.state.lng];
     
-    if(this.props.uloc) {
-      console.log(this.props.uloc[0])
-      center = [this.props.uloc[1],this.props.uloc[0]]
-    }
     return (
-      <Map  center={center} zoom={this.state.zoom}> 
-       <LayersControl position="topright">
-       <BaseLayer checked name="Sign View">
+      <Map  ref='map' center={center}  zoom={this.state.zoom}> 
+
         <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
-        </BaseLayer>
-        <Overlay name="Signs" checked>
-          <LayerGroup  name="All signs">
-          <GeoJSON key={this.props.keys} data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />
-          </LayerGroup>
-        </Overlay>
-        </LayersControl>
+
+          <GeoJSON key={this.props.keys} data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />          
+
       </Map>
     )
   }

@@ -5,21 +5,17 @@ var date = moment();
 var dow = date.day();*/
 
 var helpers = {
-
+    getCurrentHood: function(userLoc) {
+        return axios.get('/userloc', { params: { coordinates: userLoc } })
+    },    
     initGeoData: function() {
         return axios.get('/allsigns')
     },
-    initAutoGeoData: function(uloc) {
-        return axios.get('/allsigns', { params: { coordinates: uloc } })
+    initAutoGeoData: function(userLoc) {
+        return axios.get('/allsigns', { params: { coordinates: userLoc } })
     },
     getAllHoods: function() {
         return axios.get('/allhoods')
-    },
-    getHoodNames: function() {
-        return axios.get('/hoodnames')
-    },
-    getOneHood: function() {
-        return axios.get('/onehood')
     },
     monData: function() {
         return axios.get('/mon')
