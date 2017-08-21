@@ -5,13 +5,14 @@ module.exports = function(app) {
 
     // ---------------------------------------------------
     app.get("/allsigns/:coordinates?", function(req, res) {
+        console.log(parseFloat(req.query.coordinates[0]))
         var coords = [-73.982907, 40.675645]
         allsigns.find({
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: coords
+                        coordinates: [ parseFloat(req.query.coordinates[0]), parseFloat(req.query.coordinates[1])]
                     },
                     $maxDistance: 1000
                 }
