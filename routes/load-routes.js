@@ -4,9 +4,7 @@ var allsigns = require("../models/Allsigns.js");
 module.exports = function(app) {
 
     // ---------------------------------------------------
-    app.get("/allsigns/:coordinates?", function(req, res) {
-        console.log(parseFloat(req.query.coordinates[0]))
-        var coords = [-73.982907, 40.675645]
+/*    app.get("/allsigns/:coordinates?", function(req, res) {
         allsigns.find({
             geometry: {
                 $near: {
@@ -14,7 +12,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [ parseFloat(req.query.coordinates[0]), parseFloat(req.query.coordinates[1])]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 5000
                 }
             }
         }, function(error, doc) {
@@ -23,29 +21,8 @@ module.exports = function(app) {
             } else {
                 res.json(doc);
             }
-        }).limit(1000);
-    });
-    // ---------------------------------------------------
-    app.get("/allwithin", function(req, res) {
-        allsigns.find({
-
-            geometry: {
-                $geoWithin: {
-                    $geometry: {
-                        type: "Polygon",
-                        coordinates: [flatbush.geometry]
-                    }
-                }
-            }
-        }, function(error, doc) {
-            if (error) {
-                console.log(error);
-            } else {
-                /*console.log(doc)*/
-                res.json(doc);
-            }
-        }).limit(100);
-    });
+        }).limit(5000);
+    });*/
 
     app.get("/hoodnames", function(req, res) {
         Hood.distinct('name', function(error, doc) {

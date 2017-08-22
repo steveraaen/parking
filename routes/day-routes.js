@@ -44,24 +44,24 @@ doit()
     // ---------- Monday
     app.get("/mon", function(req, res) {
         allsigns.find({
-            "properties.T": /MON/i,
+            "properties.T": /TUE/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 2000
                 }
             }
         }, function(error, doc) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+                /*console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(1000);
+        }).limit(10000);
     });
     // ---------- Tuesday
     app.get("/tue", function(req, res) {
@@ -80,7 +80,7 @@ doit()
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+               /* console.log(doc)*/
                 res.json(doc);
             }
         }).limit(1000);
@@ -102,7 +102,7 @@ doit()
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+               /* console.log(doc)*/
                 res.json(doc);
             }
         }).limit(1000);
@@ -124,7 +124,7 @@ doit()
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+               /* console.log(doc)*/
                 res.json(doc);
             }
         }).limit(1000);
@@ -146,7 +146,7 @@ doit()
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+                /*console.log(doc)*/
                 res.json(doc);
             }
         }).limit(1000);
@@ -168,7 +168,7 @@ doit()
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+               /* console.log(doc)*/
                 res.json(doc);
             }
         }).limit(1000);

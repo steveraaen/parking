@@ -7,17 +7,21 @@ var dow = date.day();*/
 var helpers = {
     getCurrentHood: function(userLoc) {
         return axios.get('/userloc', { params: { coordinates: userLoc } })
+    },
+    getSignsForHood: function() {
+    return axios.get('/allwithin', { params: {}})
     },    
     initGeoData: function() {
         return axios.get('/allsigns')
     },
-    initAutoGeoData: function(userLoc) {
+/*    initAutoGeoData: function(userLoc) {
+        console.log(userLoc)
         return axios.get('/allsigns', { params: { coordinates: userLoc } })
-    },
+    },*/
     getAllHoods: function() {
         return axios.get('/allhoods')
     },
-    monData: function() {
+    initAutoGeoData: function() {
         return axios.get('/mon')
     },
     tueData: function() {

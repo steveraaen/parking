@@ -19,7 +19,7 @@ class App extends Component {
   }
   componentWillMount(){
 
-   navigator.geolocation.watchPosition(function(pos){
+   navigator.geolocation.getPosition(function(pos){
     console.log(navigator)
     var userLoc = []
     userLoc.push(pos.coords.latitude)
@@ -35,7 +35,15 @@ class App extends Component {
     }.bind(this))
 // -----------------------------------------------------
     helpers.getAllHoods().then(function(resp) {
-      
+      var polyArr = []
+      for (var i = 0; i < resp.data.length; i++) {
+        if (resp.data[i].geometry.type === "Polygon")
+        console.log(resp.data[i].geometry.type)
+      polyArr.push(resp.data[i].geometry.coordinates)
+      }
+      var polys = resp.data.map((brdr, idx) => {
+        return brdr.geometry.coordinates
+      })
 
           this.setState({
             allHoods: resp.data
@@ -96,7 +104,7 @@ componentDidMount() {
         {/*<Form hoodNames={this.state.hoodNames} />*/}
       </div>
        <div>
-       <CMarkers data={this.state.data} keys={this.state.keys} oneHood={this.state.oneHood} allHoods={this.state.allHoods} latLngList={this.state.latLngList}  uloc={this.state.uloc}  />
+       <CMarkers data={this.state.data} keys={this.state.keys} oneHood={this.state.oneHood} allHoods={this.state.allHoods} latLngList={this.state.latLngList}  userLoc={this.state.userLoc}  />
     </div>
 
       </div>
