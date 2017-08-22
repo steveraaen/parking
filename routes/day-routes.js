@@ -44,7 +44,7 @@ doit()
     // ---------- Monday
     app.get("/mon", function(req, res) {
         allsigns.find({
-            "properties.T": /TUE/i,
+            "properties.T": /MON/i,
             geometry: {
                 $near: {
                     $geometry: {
@@ -83,7 +83,7 @@ doit()
                /* console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(1000);
+        }).limit(1500);
     });
     // ---------- Wednesday
     app.get("/wed", function(req, res) {
