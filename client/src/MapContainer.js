@@ -122,7 +122,7 @@ export default class MapContainer extends Component {
 
       var lat = this.props.lat;
       var lng = this.props.lng;
-      var zoom = 15;
+      var zoom = 16;
       var center = [40.656645, -73.963907];
       var newCenter = [this.props.lat, this.props.lng];
 console.log(center)

@@ -73,7 +73,7 @@ doit()
                         type: "Point",
                         coordinates: [-73.983907, 40.676645]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 1000
                 }
             }
         }, function(error, doc) {
@@ -83,7 +83,7 @@ doit()
                /* console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(1500);
+        }).limit(2000);
     });
     // ---------- Wednesday
     app.get("/wed", function(req, res) {
