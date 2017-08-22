@@ -26,7 +26,7 @@ class App2 extends Component {
           helpers.getCurrentHood(this.state.userLoc).then(function(response) {
                 this.setState({curHood: response.data})
 
-                helpers.initAutoGeoData(this.state.userLoc).then(function(respo)  {
+                helpers.getToday(this.state.userLoc).then(function(respo)  {
                   var keyArr = respo.data.map((k_, idx) => {
                     return 'k_' + idx
                   })

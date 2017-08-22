@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, GeoJSON, LayersControl } from 'react-leaflet'
+import { Map, TileLayer, GeoJSON, LayersControl, Marker } from 'react-leaflet'
 import L from 'leaflet'
 const { BaseLayer, Overlay } = LayersControl
 
@@ -13,7 +13,7 @@ export default class MapContainer extends Component {
           zoom: 16
       }*/
       GeoJSON.propTypes = {}
-     
+      Marker.propTypes = {}
     }
 
     pointToLayer(feature, latlng) {
@@ -35,7 +35,7 @@ export default class MapContainer extends Component {
       };
       var geojsonMarkerTuesday = {
         radius: 3,
-        fillColor: "blue",
+        fillColor: "lightblue",
         color: "#000",
         weight: 1,
         opacity: 1,
@@ -130,10 +130,11 @@ console.log(newCenter)
       if(newCenter) {
       return (
         <Map  ref='map' center={this.props.userLoc}  zoom= {zoom}> 
-
+        <Marker position={this.props.userLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
             <GeoJSON key={this.props.keys} positions={this.props.curHood} data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />          
+        }
          
         </Map>
       )} else {
