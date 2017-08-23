@@ -47,8 +47,8 @@ class App extends Component {
 
         return (
       <div className="App">
-          <StatPanel data={this.state.data} lat={this.state.lat} lng={this.state.lng}/>
-            <MapContainer data={this.state.data} keys={this.state.keys} curHood={this.state.curHood} allHoods={this.state.allHoods}  lat={this.state.lat} lng={this.state.lng} userLoc={this.state.userLoc}  />
+{/*          <StatPanel data={this.state.data} lat={this.state.lat} lng={this.state.lng}/>
+*/}            <MapContainer data={this.state.data} keys={this.state.keys} curHood={this.state.curHood} allHoods={this.state.allHoods}  lat={this.state.lat} lng={this.state.lng} userLoc={this.state.userLoc}  />
       </div>
         );
     }
