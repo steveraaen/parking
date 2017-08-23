@@ -5,11 +5,8 @@ module.exports = function(app) {
 
 // ---------------- test
 app.get('/test/', function(req, res) {
-
- console.log(req.query);
-
  function doit() {
-    console.log(req.query.coordinates)
+/*    console.log(req.query.coordinates)
     var c1 = req.query.coordinates;
     var c2= c1.split(",")
     console.log(c1)
@@ -18,7 +15,7 @@ app.get('/test/', function(req, res) {
         return parseFloat(ll)
 
     })
-    console.log(coords[0])
+    console.log(coords[0])*/
  allsigns.find({
             geometry: {
                 $near: {
@@ -42,14 +39,16 @@ doit()
 
 })
     // ---------- Monday
-    app.get("/mon", function(req, res) {
+    app.get("/mon/:coordinates?", function(req, res) {
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
         allsigns.find({
             "properties.T": /MON/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
                     $maxDistance: 2000
                 }
@@ -64,16 +63,18 @@ doit()
         }).limit(10000);
     });
     // ---------- Tuesday
-    app.get("/tue", function(req, res) {
+    app.get("/tue/:coordinates?", function(req, res) {
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
         allsigns.find({
             "properties.T": /TUE/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 20000
                 }
             }
         }, function(error, doc) {
@@ -83,17 +84,21 @@ doit()
                /* console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(2000);
+        }).limit(20000);
     });
     // ---------- Wednesday
-    app.get("/wed", function(req, res) {
+    app.get("/wed/:coordinates?", function(req, res) {
+
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
+        console.log(lat, lng)
         allsigns.find({
             "properties.T": /WED/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
                     $maxDistance: 5000
                 }
@@ -108,14 +113,16 @@ doit()
         }).limit(1000);
     });
     // ----------- Thursday
-    app.get("/thu", function(req, res) {
+    app.get("/thu/:coordinates?", function(req, res) {
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
         allsigns.find({
             "properties.T": /THU/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
                     $maxDistance: 5000
                 }
@@ -130,14 +137,16 @@ doit()
         }).limit(1000);
     });
     // ---------- Friday
-    app.get("/fri", function(req, res) {
+    app.get("/fri/:coordinates?", function(req, res) {
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
         allsigns.find({
             "properties.T": /FRI/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
                     $maxDistance: 5000
                 }
@@ -152,14 +161,16 @@ doit()
         }).limit(1000);
     });
     // ---------- Saturday
-    app.get("/sat", function(req, res) {
+    app.get("/sat/:coordinates?", function(req, res) {
+        var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
+        var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
         allsigns.find({
             "properties.T": /SAT/i,
             geometry: {
                 $near: {
                     $geometry: {
                         type: "Point",
-                        coordinates: [-73.983907, 40.676645]
+                        coordinates: [lat, lng]
                     },
                     $maxDistance: 5000
                 }

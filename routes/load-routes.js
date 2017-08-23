@@ -4,6 +4,50 @@ var allsigns = require("../models/Allsigns.js");
 module.exports = function(app) {
 
     // ---------------------------------------------------
+    app.get('/oddstats', function(req, res) {
+        allsigns.distinct("properties.MUT", function(error, doc)  {
+              if (error) {
+                console.log(error);
+            } else {
+                console.log(doc);
+                res.json(doc);
+            }
+        })
+    })
+    app.get('/idrange', function(req, res) {
+        allsigns.find({"properties.ID": {$gt: 19978095, $lt: 19989595}}, function(error, doc) {
+              if (error) {
+                console.log(error);
+            } else {
+                console.log(doc);
+               res.json(doc);                
+            }           
+        });
+    })
+    app.get('/stats', function(req, res) {
+        allsigns.aggregate([
+            {
+                $group: {
+                    _id: "$properties.MUT",
+                    count: {
+                        $sum: 1
+                    }
+            }
+        }, function(err, doc)   {
+              if (error) {
+                console.log(error);
+            } else {
+                console.log(doc);
+               res.json(doc);                
+            } 
+        }])
+    })
+
+    
+
+
+
+
 /*    app.get("/allsigns/:coordinates?", function(req, res) {
         allsigns.find({
             geometry: {

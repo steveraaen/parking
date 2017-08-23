@@ -3,21 +3,21 @@ import day from './time.js'
 
 var helpers = {
 
-    getToday: function() {
+    getToday: function(userLoc) {
         if(day === "MON")   {
-           return axios.get('/mon') 
+           return axios.get('/mon', { params: { coordinates: userLoc } }) 
        } else if(day === "TUE") {
-            return axios.get('/tue')
+            return axios.get('/tue', { params: { coordinates: userLoc } })
        } else if(day === "WED") {
-            return axios.get('/wed')
+            return axios.get('/wed', { params: { coordinates: userLoc } })
        } else if(day === "THU") {
-            return axios.get('/thu')
+            return axios.get('/thu', { params: { coordinates: userLoc } })
        } else if(day === "FRI") {
-            return axios.get('/fri')
+            return axios.get('/fri', { params: { coordinates: userLoc } })
        } else if(day === "SAT") {
-            return axios.get('/sat')
+            return axios.get('/sat', { params: { coordinates: userLoc } })
        } else if(day === "SUN") {
-            return axios.get('/sun')
+            return axios.get('/sun', { params: { coordinates: userLoc } })
        }
     },
 
@@ -60,6 +60,9 @@ var helpers = {
     },
     test: function(uloc) {
         return axios.get('/test', { params: { coordinates: uloc } })
+    },
+    getStats: function() {
+        return axios.get('/idrange')
     }
 }
 // ---------------------------------

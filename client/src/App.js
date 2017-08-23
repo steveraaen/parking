@@ -1,130 +1,56 @@
 import React, { Component } from 'react';
-import CMarkers from './CMarkers.js'
+import { Map, TileLayer, GeoJSON, LayersControl, Polygon } from 'react-leaflet'
+import L from 'leaflet';
+import MapContainer from './MapContainer.js'
 import Form from './Form.js'
 import GetButton from './GetButton.js'
+import StatPanel from './StatPanel.js'
 import helpers from './helpers.js'
 import day from './time.js'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hoodNames: null,
-      uloc: null,
-      lat: "",
-      lng: "",
-      dow: day
+    constructor(props) {
+        super(props);
+        this.state = {
+            dow: day
+        }
     }
-  
-  }
-  componentWillMount(){
+    componentWillMount() {
+      helpers.getAllHoods().then(function(resp) {
+            this.setState({allHoods: resp.data})
+}.bind(this))
+      navigator.geolocation.getCurrentPosition(function(pos) {
+            this.setState({ userLoc: [pos.coords.latitude, pos.coords.longitude],
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude
+                          })
 
-   navigator.geolocation.getPosition(function(pos){
-    console.log(navigator)
-    var userLoc = []
-    userLoc.push(pos.coords.latitude)
-    userLoc.push(pos.coords.longitude)
-    this.setState({ lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                    uloc: [pos.coords.longitude, pos.coords.latitude]
-    })
-        }.bind(this))
+          helpers.getCurrentHood(this.state.userLoc).then(function(response) {
+                this.setState({curHood: response.data})
 
-    helpers.getHoodNames().then(function(res){
-          this.setState({hoodNames: res.data });
-    }.bind(this))
-// -----------------------------------------------------
-    helpers.getAllHoods().then(function(resp) {
-      var polyArr = []
-      for (var i = 0; i < resp.data.length; i++) {
-        if (resp.data[i].geometry.type === "Polygon")
-        console.log(resp.data[i].geometry.type)
-      polyArr.push(resp.data[i].geometry.coordinates)
-      }
-      var polys = resp.data.map((brdr, idx) => {
-        return brdr.geometry.coordinates
-      })
+                helpers.getToday(this.state.userLoc).then(function(respo)  {
+                  var keyArr = respo.data.map((k_, idx) => {
+                    return 'k_' + idx
+                  })
+                this.setState({data: respo.data,
+                               keys: keyArr
+                              })
+}.bind(this))       
+}.bind(this)) 
+}.bind(this))
+    }
 
-          this.setState({
-            allHoods: resp.data
-        })
-    }.bind(this)) 
-// ------------------------------------------
-    helpers.getOneHood().then(function(response) {
-      console.log(response.data.geometry.coordinates[0].length)
-      response.data.geometry.coordinates[0].pop();
-      console.log(response.data.geometry.coordinates[0].length)
 
-      /*var toGJ = response.data.toGeoJSON()*/
-      console.log(response.data)
+    render() {
+      var zoom = 13;
+      var center = [40.656645, -73.963907];
 
-          this.setState({
-            oneHood: response.data,
-            latLngList: response.data.geometry.coordinates[0]
-          })
-          
-    }.bind(this)) 
-}
-componentDidMount() {
-  helpers.initAutoGeoData(this.state.uloc).then(function(res) {
-        if (res !== this.state.data) {
-          var textArr = res.data.map((text) => {
-            return text.properties.T
-            })
-          var keyArr = res.data.map((k, idx) => {
-            return 'k_' + idx
-            })
-}
-        this.setState({ keys: keyArr,
-                        data: res.data,
-                        text: textArr
-        })
-      }.bind(this))
-
-/*    helpers.initGeoData().then(function(res) {
-        if (res !== this.state.data) {
-          var textArr = res.data.map((text) => {
-            return text.properties.T
-            })
-          var keyArr = res.data.map((k, idx) => {
-            return 'k_' + idx
-            })
-}
-        this.setState({ keys: keyArr,
-                        data: res.data,
-                        text: textArr
-        })
-      }.bind(this))*/
-}
-  render() {
-    
-    return (
+        return (
       <div className="App">
-            <div> 
-        {/*<Form hoodNames={this.state.hoodNames} />*/}
+          <StatPanel data={this.state.data} lat={this.state.lat} lng={this.state.lng}/>
+            <MapContainer data={this.state.data} keys={this.state.keys} curHood={this.state.curHood} allHoods={this.state.allHoods}  lat={this.state.lat} lng={this.state.lng} userLoc={this.state.userLoc}  />
       </div>
-       <div>
-       <CMarkers data={this.state.data} keys={this.state.keys} oneHood={this.state.oneHood} allHoods={this.state.allHoods} latLngList={this.state.latLngList}  userLoc={this.state.userLoc}  />
-    </div>
-
-      </div>
-      );
-  }
+        );
+    }
 }
-
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
