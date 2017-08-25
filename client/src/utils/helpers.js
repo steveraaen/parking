@@ -6,7 +6,7 @@ var helpers = {
         getOCData: function(location) {
         location = "24 West 75th St, NY"
         var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + pwds.ocage;
-        console.log(queryURL)
+ /*       console.log(queryURL)*/
         return axios.get(queryURL).then(function(response) {
           if (response.data.results) {
             console.log(response.data.results)

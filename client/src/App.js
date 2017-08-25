@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, GeoJSON, LayersControl, Polygon } from 'react-leaflet'
-import L from 'leaflet';
 import MapContainer from './MapContainer.js'
-import MapContainerJr from './MapContainerJr.js'
-import StatPanel from './StatPanel.js'
 import helpers from './utils/helpers.js'
 import day from './utils/time.js'
 
@@ -82,7 +78,7 @@ class App extends Component {
       <div className="App">
         <div className="navbar">
         <form> 
-        
+
           <button className="btn btn-xs" onClick={this.handleClick} value={[this.state.oCageLat, this.state.oCageLng]}>GO</button>
         </form> 
         </div>

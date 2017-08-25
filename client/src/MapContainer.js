@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, GeoJSON, LayersControl, Marker } from 'react-leaflet'
+import { Map, TileLayer, GeoJSON, Marker } from 'react-leaflet'
 import L from 'leaflet'
-const { BaseLayer, Overlay } = LayersControl
 
 export default class MapContainer extends Component {
 
