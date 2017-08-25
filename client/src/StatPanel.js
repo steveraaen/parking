@@ -1,30 +1,37 @@
 import React, { Component } from 'react'
-import helpers from './helpers.js'
+import helpers from './utils/helpers.js'
 import Form from './Form.js'
 
 export default class StatPanel extends Component {
 	constructor(props) {
 		super(props);
+
+	}
+	componentWillReceiveProps() {
+
+	}
+	componentDidUpdate() {
+
+
 	}
 	render() {
+
 		return (
-			<div className="jumbotron">
-			{/*<Form hoodNames={this.state.hoodNames} />*/}
+			
+
 				<div className="container">
 					<div className="row">
-						<div className="col-sm-3"><h3>Neighborhood</h3></div>
-						<div className="col-sm-3"><h3>2</h3></div>
-						<div className="col-sm-3"><h3>3</h3></div>
-						<div className="col-sm-3"><h3>4</h3></div>
+						<div className="col-sm-12">
+							<p>Neighborhood</p>
+						</div>
 					</div>
 					<div className="row">
-						<div className="col-sm-3"><h4>1</h4></div>
-						<div className="col-sm-3"><h4>2</h4></div>
-						<div className="col-sm-3"><h4>3</h4></div>
-						<div className="col-sm-3"><h4>4</h4></div>
+						<div className="col-xs-3"><p>1</p></div>
+						<div className="col-xs-3"><p>2</p></div>
+						<div className="col-xs-3"><p>3</p></div>
+						<div className="col-xs-3"><p>4</p></div>
 					</div>
 				</div>
-			</div>
 			)
 	}
 }

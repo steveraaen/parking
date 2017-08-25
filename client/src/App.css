@@ -3,18 +3,18 @@
 }
 
 
-.App-header {
+/*.App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
-}
+}*/
 
 .App-intro {
   font-size: large;
 }
 .leaflet-container {
-    height: 960px;
+    height: 780px;
     width: 100%;
     color: #006400;
 }

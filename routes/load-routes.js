@@ -1,6 +1,6 @@
 var Hood = require("../models/Hoods.js");
 var allsigns = require("../models/Allsigns.js");
-
+var geojhoods = require("../models/GeoJHoods.js");
 module.exports = function(app) {
 
     // ---------------------------------------------------
@@ -78,12 +78,13 @@ module.exports = function(app) {
         });
     });
 // ------------------ get neighborhoods ----------------------
-    app.get("/allhoods/", function(req, res) {
-        Hood.find({}, function(error, doc) {
+    app.get("/geohoods", function(req, res) {
+        
+        geojhoods.find({}, function(error, doc) {
             if (error) {
                 console.log(error);
             } else {
-              /*  console.log(doc)*/
+                console.log(doc)
                 res.json(doc);
             }
         });

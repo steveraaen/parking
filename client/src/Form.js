@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import helpers from './helpers.js'
+import helpers from './utils/helpers.js'
 
 export default class Form extends Component {
   constructor(props) {

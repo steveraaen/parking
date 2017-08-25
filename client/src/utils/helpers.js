@@ -1,7 +1,24 @@
 import axios from 'axios'
 import day from './time.js'
+import pwds from './passwds.js';
 
 var helpers = {
+        getOCData: function(location) {
+        location = "24 West 75th St, NY"
+        var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + pwds.ocage;
+        console.log(queryURL)
+        return axios.get(queryURL).then(function(response) {
+          if (response.data.results) {
+            console.log(response.data.results)
+            return response.data.results;
+          }
+          else {
+            console.log("Does not have data")
+            return "";  
+          }
+          
+        });
+  },
 
     getToday: function(userLoc) {
         if(day === "MON")   {
@@ -35,7 +52,7 @@ var helpers = {
         return axios.get('/allsigns', { params: { coordinates: userLoc } })
     },*/
     getAllHoods: function() {
-        return axios.get('/allhoods')
+        return axios.get('/geojhoods')
     },
     initAutoGeoData: function() {
         return axios.get('/mon')
