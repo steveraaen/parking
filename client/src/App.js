@@ -64,14 +64,13 @@ class App extends Component {
             }.bind(this))
         }.bind(this))
     }
-            handleClick(e) {
-            e.preventDefault();
+        handleClick(e) {
+         e.preventDefault();
             console.log(e.target.value)
             this.fetchSigns([this.state.oCageLat, this.state.oCageLng])
             this.setState({
                 userLoc: [this.state.oCageLat, this.state.oCageLng]
-            })
-            
+            })           
         }
     render() {
         return (
