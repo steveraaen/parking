@@ -14,7 +14,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 2000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 20000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {
@@ -64,7 +64,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {
@@ -88,7 +88,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {
@@ -112,7 +112,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 1000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {
@@ -136,7 +136,7 @@ module.exports = function(app) {
                         type: "Point",
                         coordinates: [lat, lng]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 500 * 1.60934
                 }
             }
         }, function(error, doc) {

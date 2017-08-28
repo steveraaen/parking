@@ -1,30 +1,33 @@
-export default class PlaceForm extends React.Component {
+import React, { Component } from 'react'
+
+export default class PlaceForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {searchTerm: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({searchTerm: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+   
+    this.props.getOCData(this.state.searchTerm);
+    console.log(event)
   }
 
   render() {
     return (
+
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
+          <input className="placeInput" type="text" value={this.state.searchTerm} onChange={this.handleChange} placeholder="Enter a place (Beacon Theater) or an address in NYC" />
+        <input type="submit" />
       </form>
+
     );
   }
 }

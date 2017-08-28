@@ -1,20 +1,21 @@
-.App {
+/*.App {
   text-align: center;
 }
+*/
 
-
-/*.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}*/
-
-.App-intro {
-  font-size: large;
+.App-header {
+  height: 5vh;
+  width:100%;
 }
+
 .leaflet-container {
-    height: 780px;
+    height: 95vh;
     width: 100%;
     color: #006400;
+}
+.placeInput	{
+	width: 400px;
+}
+map {
+	height:960px;
 }

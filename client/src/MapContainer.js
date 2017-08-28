@@ -80,17 +80,17 @@ export default class MapContainer extends Component {
         opacity: 1,
         fillOpacity: 0.8
       };
-      if (feature.properties.T.includes('MON')) {
+      if (feature.properties.T.includes('11AM-12:30PM MON THU')) {
           return L.circleMarker(latlng, geojsonMarkerMonday);
-      } else if (feature.properties.T.includes('TUE')) {
+      } else if (feature.properties.T.includes('2AM-6AM MON WED FRI')) {
           return L.circleMarker(latlng, geojsonMarkerTuesday);
-      } else if (feature.properties.T.includes('WED')) {
-          return L.circleMarker(latlng, geojsonMarkerWednesday);
-      } else if (feature.properties.T.includes('THU')) {
+      } else if (feature.properties.T.includes('"MON WED FRI 2AM-6AM"')) {
+          return L.circleMarker(latlng, geojsonMarkerTuesday);
+      } else if (feature.properties.T.includes("MON THU 6AM-6:30AM")) {
           return L.circleMarker(latlng, geojsonMarkerThursday);
-      } else if (feature.properties.T.includes('FRI')) {
+      } else if (feature.properties.T.includes("MON THU 5:30AM-6AM")) {
           return L.circleMarker(latlng, geojsonMarkerFriday);
-      } else if (feature.properties.T.includes('SAT')) {
+      } else if (feature.properties.T.includes("MON WED FRI 3AM-6AM")) {
           return L.circleMarker(latlng, geojsonMarkerSaturday);
       } else if (feature.properties.T.includes('SUN')) {
           return L.circleMarker(latlng, geojsonMarkerSunday);
@@ -121,8 +121,8 @@ export default class MapContainer extends Component {
   render() {
 
       return (
-        <Map  ref='map' center={this.props.userLoc}  zoom= {16}> 
-        <Marker position={this.props.userLoc} />
+        <Map  ref='map' center={this.props.placeLoc}  zoom= {15}> 
+        <Marker position={this.props.placeLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
             <GeoJSON key={this.props.keys}  data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />  

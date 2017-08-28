@@ -1,56 +1,43 @@
 import axios from 'axios'
-import day from './time.js'
-import pwds from './passwds.js';
+/*import day from './time.js'*/
+
+
 
 var helpers = {
-        getOCData: function(location) {
-        location = "24 West 75th St, NY"
-        var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + pwds.ocage;
- /*       console.log(queryURL)*/
-        return axios.get(queryURL).then(function(response) {
-          if (response.data.results) {
-            console.log(response.data.results)
-            return response.data.results;
-          }
-          else {
-            console.log("Does not have data")
-            return "";  
-          }
-          
-        });
-  },
-
-    getToday: function(userLoc) {
-        if(day === "MON")   {
-           return axios.get('/mon', { params: { coordinates: userLoc } }) 
-       } else if(day === "TUE") {
-            return axios.get('/tue', { params: { coordinates: userLoc } })
-       } else if(day === "WED") {
-            return axios.get('/wed', { params: { coordinates: userLoc } })
-       } else if(day === "THU") {
-            return axios.get('/thu', { params: { coordinates: userLoc } })
-       } else if(day === "FRI") {
-            return axios.get('/fri', { params: { coordinates: userLoc } })
-       } else if(day === "SAT") {
-            return axios.get('/sat', { params: { coordinates: userLoc } })
-       } else if(day === "SUN") {
-            return axios.get('/sun', { params: { coordinates: userLoc } })
-       }
+    getOCData: function(term) {
+        return axios.get('/ocage', {params: {searchTerm: term}})
     },
-
+    getToday: function(userLoc) {
+        var day = "MON";
+        if (day === "MON") {
+            return axios.get('/mon', { params: { coordinates: userLoc } })
+        } else if (day === "TUE") {
+            return axios.get('/tue', { params: { coordinates: userLoc } })
+        } else if (day === "WED") {
+            return axios.get('/wed', { params: { coordinates: userLoc } })
+        } else if (day === "THU") {
+            return axios.get('/thu', { params: { coordinates: userLoc } })
+        } else if (day === "FRI") {
+            return axios.get('/fri', { params: { coordinates: userLoc } })
+        } else if (day === "SAT") {
+            return axios.get('/sat', { params: { coordinates: userLoc } })
+        } else if (day === "SUN") {
+            return axios.get('/sun', { params: { coordinates: userLoc } })
+        }
+    },
     getCurrentHood: function(userLoc) {
         return axios.get('/userloc', { params: { coordinates: userLoc } })
     },
     getSignsForHood: function() {
-    return axios.get('/allwithin', { params: {}})
-    },    
+        return axios.get('/allwithin', { params: {} })
+    },
     initGeoData: function() {
         return axios.get('/allsigns')
     },
-/*    initAutoGeoData: function(userLoc) {
-        console.log(userLoc)
-        return axios.get('/allsigns', { params: { coordinates: userLoc } })
-    },*/
+    /*    initAutoGeoData: function(userLoc) {
+            console.log(userLoc)
+            return axios.get('/allsigns', { params: { coordinates: userLoc } })
+        },*/
     getAllHoods: function() {
         return axios.get('/geojhoods')
     },
@@ -84,25 +71,3 @@ var helpers = {
 }
 // ---------------------------------
 export default helpers;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
