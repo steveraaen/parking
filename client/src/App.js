@@ -37,7 +37,7 @@ class App extends Component {
         }.bind(this));
     }
     fetchSigns(placeLoc) {
-    var pieColors= ["#008AF8","#008A1F","#e6ca2d","#CC1713","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
+    var pieColors= ["#008AF8","#008A1F","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
      placeLoc = [this.state.OClat, this.state.OClng]
 
       this.setState({placeLoc: placeLoc})
@@ -78,7 +78,7 @@ class App extends Component {
                   console.log(signSort)
 
                   var topSix = [];
-                    for(let i = 0; i < 12; i++){
+                    for(let i = 0; i < 10; i++){
                       topSix.push(signSort[i])
 }
                     this.setState({

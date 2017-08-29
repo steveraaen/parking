@@ -17,7 +17,7 @@ console.log(this.props.data)
 if(this.props.data) {
 	var onlySix= []
 	var allTwelve = this.props.data
-	for(let i = 0; i < 9; i++) {
+	for(let i = 0; i < 6; i++) {
 		onlySix.push(allTwelve[i])
 	}
 	console.log(onlySix)
@@ -30,8 +30,8 @@ if(this.props.data) {
 		  data={onlySix}
       onValueMouseOver={v => this.setState({value: v})}
       onSeriesMouseOut={v => this.setState({value: false})}
-		  width={600}
-		  height={600}>
+		  width={400}
+		  height={400}>
 		  {value && <Hint value={value}/>}
 		 </RadialChart>
 		  

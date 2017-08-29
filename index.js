@@ -16,7 +16,6 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 require("./routes/place-routes.js")(app);
 require("./routes/load-routes.js")(app);
 require("./routes/day-routes.js")(app);
-require("./routes/metrics-routes.js")(app);
 
 // ------ Connect to the db
 // https://www.mlab.com/databases/heroku_5d4vj37d
