@@ -12,7 +12,7 @@ class App extends Component {
         super(props);
         this.state = {
             dow: day,
-            place: "Beacon Theater, NYC"
+            place: "Madison Square Garden, NYC"
         }
         this.fetchSigns = this.fetchSigns.bind(this)
         this.getOCData = this.getOCData.bind(this)
@@ -36,12 +36,12 @@ class App extends Component {
         }.bind(this));
     }
     fetchSigns(placeLoc) {
-    var pieColors= ["blue", "pink", "yellow", "red", "orange", "white"]
+    var pieColors= ["#b2f448","#85c026","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2",]
      placeLoc = [this.state.OClat, this.state.OClng]
 
       this.setState({placeLoc: placeLoc})
 
-        helpers.getToday(placeLoc).then(function(respo) {
+        helpers.getToday(this.state.userLoc).then(function(respo) {
           console.log(respo)
             var keyArr = respo.data.map((k_, idx) => {
                 return 'k_' + idx
@@ -50,7 +50,7 @@ class App extends Component {
                 const muts = [];
                 const statArray = respo.data;
                 for (let i = 0; i < statArray.length; i++) {
-                    var mut = statArray[i].properties.MUT
+                   
                     var t = statArray[i].properties.T
                     muts.push(t)
                 }
@@ -77,7 +77,7 @@ class App extends Component {
                   console.log(signSort)
 
                   var topSix = [];
-                    for(let i = 0; i < 6; i++){
+                    for(let i = 0; i < signSort.length; i++){
                       topSix.push(signSort[i])
 }
                     this.setState({
@@ -85,6 +85,7 @@ class App extends Component {
                     })
                 }
             }
+            console.log(Array.isArray(respo.data))
             this.setState({
                 data: respo.data,
                 keys: keyArr
@@ -123,12 +124,12 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <MapContainer  data={this.state.data} keys={this.state.keys} curHood={this.state.curHood} allHoods={this.state.allHoods}  featSet={this.state.featSet} lat={this.state.lat} lng={this.state.lng} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>  
+              <MapContainer  data={this.state.data} keys={this.state.keys}  mutsum={this.state.mutsum} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>  
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <Viz data={this.state.mutsum} />  
+              <Viz data={this.state.mutsum} signSet={this.state.data}/>  
             </div>
           </div>
         </div>       

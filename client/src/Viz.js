@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import {RadialChart} from 'react-vis'
 
 export default class Viz extends Component {
-	constructor(props){
-	super(props);
 
-	}
 	componentDidUpdate() {
 console.log(this.props.data)
 	}
@@ -18,8 +15,8 @@ if(this.props.data) {
 		  data={this.props.data}
 		  colorType="literal"
 		  innerRadius={60}
-		  width={400}
-		  height={300}
+		  width={600}
+		  height={600}
 		  showLabels={true}
 		   />
 		  

@@ -1,5 +1,5 @@
 import axios from 'axios'
-/*import day from './time.js'*/
+import day from './time.js'
 
 
 
@@ -8,7 +8,7 @@ var helpers = {
         return axios.get('/ocage', {params: {searchTerm: term}})
     },
     getToday: function(userLoc) {
-        var day = "MON";
+        
         if (day === "MON") {
             return axios.get('/mon', { params: { coordinates: userLoc } })
         } else if (day === "TUE") {

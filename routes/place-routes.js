@@ -1,12 +1,36 @@
 var Hood = require("../models/Hoods.js");
 var Place = require("../models/Place.js");
+var allsigns = require("../models/Allsigns.js");
+var testsigns = require("../models/Testsigns.js");
 
 
 module.exports = function(app) {
 
-    app.get('/ocage/:placeLoc?', function(req, res) {
+        app.get("/testsigns", function(req, res) {
+        allsigns.find({
+            "properties.T": /THU/i,
+            geometry: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [-73.984002, 40.676674]
+                    },
+                    $maxDistance: 500 * 1.60934
+                }
+            }
+        }, function(error, doc) {
+            if (error) {
+                console.log(error);
+            } else {
+               /* console.log(doc)*/
+                res.json(doc);
+            }
+        }).limit(1000);
+    });
 
-/*         var place = "Madison Square Garden"
+/*    app.get('/ocage/:placeLoc?', function(req, res) {
+
+         var place = "Madison Square Garden"
          console.log(place)
         var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place + "&pretty=1&key=" + pwds.ocage;
                
@@ -20,8 +44,8 @@ module.exports = function(app) {
             }
         }.bind(this));
     
-        res.send(place)*/
-    });
+        res.send(place)
+    });*/
     
 
     // ---------------------------------
@@ -50,26 +74,24 @@ module.exports = function(app) {
         });
     })
 
-        // ---------------------------------------------------
-    app.get("/allwithin/:polycoords?", function(req, res) {
-        allsigns.find({
 
-            geometry: {
-                $geoWithin: {
-                    $geometry: {
-                        type: "Polygon",
-                        coordinates: [flatbush.geometry]
-                    }
-                }
-            }
-        }, function(error, doc) {
-            if (error) {
-                console.log(error);
-            } else {
-                /*console.log(doc)*/
-                res.json(doc);
-            }
-        }).limit(100);
-    });
-}
+    }
+
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

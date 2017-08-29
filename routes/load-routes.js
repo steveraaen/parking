@@ -24,23 +24,6 @@ module.exports = function(app) {
             }
         });
     })
-    app.get('/stats', function(req, res) {
-        allsigns.aggregate(
-            { $unwind: '$properties' },
-            { $sort: {
-                    '$properties.MUT': -1 
-                }
-            },
-            function(error, doc) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log(doc);
-                    res.json(doc);
-                }
-            }
-        )
-    })
 
     /*    app.get("/allsigns/:coordinates?", function(req, res) {
             allsigns.find({

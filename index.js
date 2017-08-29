@@ -13,9 +13,10 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // ------ Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+require("./routes/place-routes.js")(app);
 require("./routes/load-routes.js")(app);
 require("./routes/day-routes.js")(app);
-require("./routes/place-routes.js")(app);
+
 // ------ Connect to the db
 // https://www.mlab.com/databases/heroku_5d4vj37d
 mongoose.connect("mongodb://heroku_5d4vj37d:poartpmu8os1cokg44ajpajpck@ds163679.mlab.com:63679/heroku_5d4vj37d");
