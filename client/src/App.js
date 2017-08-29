@@ -3,6 +3,7 @@ import axios from 'axios'
 import MapContainer from './MapContainer.js'
 import PlaceForm from './PlaceForm.js'
 import Viz from './Viz.js'
+import Stats from './Stats.js'
 import helpers from './utils/helpers.js'
 import pwds from './utils/passwds.js'
 import day from './utils/time.js'
@@ -36,7 +37,7 @@ class App extends Component {
         }.bind(this));
     }
     fetchSigns(placeLoc) {
-    var pieColors= ["#b2f448","#85c026","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2",]
+    var pieColors= ["#008AF8","#008A1F","#e6ca2d","#CC1713","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
      placeLoc = [this.state.OClat, this.state.OClng]
 
       this.setState({placeLoc: placeLoc})
@@ -77,7 +78,7 @@ class App extends Component {
                   console.log(signSort)
 
                   var topSix = [];
-                    for(let i = 0; i < signSort.length; i++){
+                    for(let i = 0; i < 12; i++){
                       topSix.push(signSort[i])
 }
                     this.setState({
@@ -125,6 +126,12 @@ class App extends Component {
           <div className="row">
             <div className="col-sm-12">
               <MapContainer  data={this.state.data} keys={this.state.keys}  mutsum={this.state.mutsum} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>  
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-12">
+              <Stats data={this.state.mutsum} signSet={this.state.data}/>  
             </div>
           </div>
           <div className="row">

@@ -18,7 +18,7 @@ export default class MapContainer extends Component {
 
     pointToLayer(feature, latlng) {
 
-      var markerColors= ["#b2f448","#85c026","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2",]
+      var markerColors= ["#008AF8","#008A1F","#e6ca2d","#CC1713","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
             var geojsonMarkerAM1 = {
         radius: 3,
         fillColor: markerColors[0],
@@ -108,10 +108,6 @@ export default class MapContainer extends Component {
         opacity: 1,
         fillOpacity: 0.8
       };
-      console.log(this.props.mutsum)
-
-
-
       if (feature.properties.T.includes(this.props.mutsum[0].label)) {
           return L.circleMarker(latlng, geojsonMarkerAM1);
       } else if (feature.properties.T.includes(this.props.mutsum[1].label)) {
@@ -157,7 +153,7 @@ export default class MapContainer extends Component {
   render() {
 
       return (
-        <Map  ref='map' center={this.props.userLoc}  zoom= {15}> 
+        <Map  ref='map' center={this.props.userLoc}  zoom= {15.3}> 
         <Marker position={this.props.userLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
