@@ -13,13 +13,18 @@ class App extends Component {
         super(props);
         this.state = {
             dow: day,
-            place: "Madison Square Garden, NYC"
+            place: null
         }
         this.fetchSigns = this.fetchSigns.bind(this)
         this.getOCData = this.getOCData.bind(this)
     }
     getOCData(place) {
-       place = this.state.place
+
+       if(this.state.place){
+        place = this.state.place
+       } else {
+        place = "Beacon Theater, New York"}
+        
         var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place + "&pretty=1&key=" + pwds.ocage;
                
         return axios.get(queryURL).then(function(response) {
@@ -28,8 +33,8 @@ class App extends Component {
                 OClat: response.data.results[0].geometry.lat,
                 OClng: response.data.results[1].geometry.lng                
               })
-
-                return response.data.results;
+              this.fetchSigns([this.state.OClat, this.state.OClng])
+                
             } else {
                 console.log("Does not have data")
                 return "";
@@ -94,6 +99,7 @@ class App extends Component {
             console.log(this.state.data)
         }.bind(this))
     }
+
     componentWillMount() {
         navigator.geolocation.getCurrentPosition(function(pos) {
             this.setState({
@@ -106,20 +112,16 @@ class App extends Component {
             }.bind(this))
         }.bind(this))
     }
-/*      setTerm(term) {
-          this.setState({ searchTerm: term });
-        }*/
-        componentDidMount() {
-          this.getOCData()
-        }
     render() {
         return (
       <div className="App">
+      <h2>ASP Turnover</h2><code className="center">{`This currently only works in NYC. 
+                                                      The form below isn't finished.`}</code>
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
               <div className="App-header">
-                <PlaceForm OClat={this.state.OClat} OClng={this.state.OClng}  placeLoc={this.state.placeLoc} getOCData={this.getOCData} fetchSigns={this.fetchSigns} />
+                <PlaceForm setPlace={this.setPlace} getOCData={this.getOCData} fetchSigns={this.fetchSigns} />
               </div>            
             </div>
           </div>
