@@ -153,12 +153,12 @@ export default class MapContainer extends Component {
   render() {
 
       return (
-        <Map  ref='map' center={this.props.userLoc}  zoom= {15.5}> 
-        <Marker position={this.props.userLoc} />
+        <Map  center={this.props.sessionLoc}  zoom= {15.5}> 
+        <Marker position={this.props.sessionLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
             <GeoJSON key={this.props.keys}  data={this.props.data}  pointToLayer={this.pointToLayer.bind(this)} onEachFeature={this.onEachFeature.bind(this)} />  
-            <GeoJSON data={this.props.curHood} />
+          
 
         </Map>
      

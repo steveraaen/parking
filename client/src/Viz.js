@@ -9,7 +9,7 @@ this.state = {
   }
 	}
 	componentDidUpdate() {
-console.log(this.props.data)
+/*console.log(this.props.data)*/
 	}
 
 	render() {
@@ -20,7 +20,7 @@ if(this.props.data) {
 	for(let i = 0; i < 6; i++) {
 		onlySix.push(allTwelve[i])
 	}
-	console.log(onlySix)
+/*	console.log(onlySix)*/
 		return (			
   <div>
  	<RadialChart

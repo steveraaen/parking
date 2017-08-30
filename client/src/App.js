@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import MapContainer from './MapContainer.js'
 import PlaceForm from './PlaceForm.js'
-import Viz from './Viz.js'
+/*import Viz from './Viz.js'*/
 import Stats from './Stats.js'
 import helpers from './utils/helpers.js'
-import pwds from './utils/passwds.js'
 import day from './utils/time.js'
 
 class App extends Component {
@@ -13,41 +11,43 @@ class App extends Component {
         super(props);
         this.state = {
             dow: day,
-            place: null
+            placeLoc: null
         }
         this.fetchSigns = this.fetchSigns.bind(this)
-        this.getOCData = this.getOCData.bind(this)
+        this.setPlaceLoc = this.setPlaceLoc.bind(this)
+     /*   this.getOCData = this.getOCData.bind(this)  */   
     }
-    getOCData(place) {
 
+/*    getOCData(place) {
        if(this.state.place){
         place = this.state.place
-       } else {
-        place = "Beacon Theater, New York"}
+        console.log(place)
         
-        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place + "&pretty=1&key=" + pwds.ocage;
-               
+        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + this.state.place + "&pretty=1&key=" + pwds.ocage;               
         return axios.get(queryURL).then(function(response) {
             if (response.data.results) {
+              console.log(response)
               this.setState({
                 OClat: response.data.results[0].geometry.lat,
                 OClng: response.data.results[1].geometry.lng                
               })
-              this.fetchSigns([this.state.OClat, this.state.OClng])
-                
+              this.fetchSigns([this.state.OClat, this.state.OClng])                
             } else {
                 console.log("Does not have data")
                 return "";
             }
         }.bind(this));
-    }
+        }
+    }*/
     fetchSigns(placeLoc) {
-    var pieColors= ["#008AF8","#008A1F","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
-     placeLoc = [this.state.OClat, this.state.OClng]
+    var pieColors= ["#008AF8","#008A1F","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2","#008A1F","#e6ca2d","#de921b","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
+     if(!this.state.placeLoc) {
+      placeLoc = this.state.userLoc
+     } else 
+        placeLoc = this.state.placeLoc
+        this.setState({sessionLoc: placeLoc})
 
-      this.setState({placeLoc: placeLoc})
-
-        helpers.getToday(this.state.userLoc).then(function(respo) {
+        helpers.getToday(placeLoc).then(function(respo) {
           console.log(respo)
             var keyArr = respo.data.map((k_, idx) => {
                 return 'k_' + idx
@@ -55,17 +55,14 @@ class App extends Component {
             if (Array.isArray(respo.data)) {
                 const muts = [];
                 const statArray = respo.data;
-                for (let i = 0; i < statArray.length; i++) {
-                   
+                for (let i = 0; i < statArray.length; i++) {                   
                     var t = statArray[i].properties.T
                     muts.push(t)
-                }
-                
+                }                
                 var counts = {};
                   for (var i = 0; i < muts.length; i++) {
                       counts[muts[i]] = 1 + (counts[muts[i]] || 0);
-                  }
-                  console.log(counts)
+                  }                 
                 const mutsum = muts.reduce((count, code, idx) => {
                     count[code] = (count[code] || 0) + 1;
                     return count;
@@ -75,15 +72,12 @@ class App extends Component {
                     return {angle: mutsum[key], 
                             label: String(key), 
                             color: pieColors[idx]};
-                  });
-                  console.log(result)
+                  });               
                   var signSort = result.sort(function (a, b) {
                     return b.angle - a.angle;
                   });
-                  console.log(signSort)
-
                   var topSix = [];
-                    for(let i = 0; i < 10; i++){
+                    for(let i = 0; i < signSort.length; i++){
                       topSix.push(signSort[i])
 }
                     this.setState({
@@ -91,46 +85,45 @@ class App extends Component {
                     })
                 }
             }
-            console.log(Array.isArray(respo.data))
             this.setState({
                 data: respo.data,
                 keys: keyArr
             })
-            console.log(this.state.data)
+
         }.bind(this))
     }
-
-    componentWillMount() {
+   componentWillMount() {
         navigator.geolocation.getCurrentPosition(function(pos) {
             this.setState({
                 userLoc: [pos.coords.latitude, pos.coords.longitude]
             })
-
             helpers.getCurrentHood(this.state.userLoc).then(function(response) {
                 this.setState({ curHood: response.data })
                 this.fetchSigns(this.state.userLoc)
             }.bind(this))
         }.bind(this))
     }
+    setPlaceLoc(place)  {
+      this.setState({placeLoc: place})
+    }
+ 
     render() {
         return (
       <div className="App">
-      <h2>ASP Turnover</h2><code className="center">{`This currently only works in NYC. 
-                                                      The form below isn't finished.`}</code>
+      <h2>ASP Turnover</h2><code className="center">{`This currently only works in NYC. The form below isn't finished.`}</code>
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
               <div className="App-header">
-                <PlaceForm setPlace={this.setPlace} getOCData={this.getOCData} fetchSigns={this.fetchSigns} />
+                <PlaceForm setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />
               </div>            
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-12">
-              <MapContainer  data={this.state.data} keys={this.state.keys}  mutsum={this.state.mutsum} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>  
+            <div className="col-sm-12 well">
+              <MapContainer  data={this.state.data} keys={this.state.keys}  mutsum={this.state.mutsum} sessionLoc={this.state.sessionLoc} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>  
             </div>
           </div>
-
           <div className="row">
             <div className="col-sm-12">
               <Stats data={this.state.mutsum} signSet={this.state.data}/>  
@@ -138,7 +131,7 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <Viz data={this.state.mutsum} signSet={this.state.data}/>  
+             {/* <Viz data={this.state.mutsum} signSet={this.state.data}/> */} 
             </div>
           </div>
         </div>       

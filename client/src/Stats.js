@@ -4,6 +4,7 @@ export default class Stats extends Component {
 
 render()	{
 	if(this.props.data) {
+		console.log(this.props.data)
 		var tenSigns = this.props.data
 		var labelArray = []
 		var angleArray = []
