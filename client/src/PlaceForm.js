@@ -14,7 +14,7 @@ import pwds from './utils/passwds.js'
         place = this.state.place
         console.log(place)
         
-        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + this.state.place + "&pretty=1&key=" + pwds.ocage;               
+        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place  + "&pretty=1&key=" + pwds.ocage;               
         return axios.get(queryURL).then(function(response) {
             if (response.data.results) {
               console.log(response)
@@ -46,7 +46,7 @@ import pwds from './utils/passwds.js'
     return (
         <div >
           <input className="placeInput" name="place" type="text" value={this.state.place} onChange={this.handleChange} placeholder="Enter a place (e.g., Beacon Theater) or an address in NYC" />
-         <input type="button" onClick={this.handleClick} />
+         <input type="button" className="btn btn-xs btn-primary" onClick={this.handleClick} value={"Find Place"} />
         </div>
 
     );

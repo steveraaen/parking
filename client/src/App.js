@@ -114,9 +114,9 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-              <div className="App-header">
+
                 <PlaceForm setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />
-              </div>            
+               
             </div>
           </div>
           <div className="row">
