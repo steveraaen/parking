@@ -1,4 +1,5 @@
 var allsigns = require("../models/Allsigns.js");
+var testsigns = require("../models/Testsigns.js");
 
 
 module.exports = function(app) {
@@ -80,7 +81,7 @@ module.exports = function(app) {
     app.get("/thu/:coordinates?", function(req, res) {
         var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
         var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
-        allsigns.find({
+        testsigns.find({
             "properties.T": /THU/i,
             geometry: {
                 $near: {

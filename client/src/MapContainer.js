@@ -18,7 +18,7 @@ export default class MapContainer extends Component {
 
     pointToLayer(feature, latlng) {
 
-      var markerColors= ["#008AF8","#008A1F","#e6ca2d","#CC1713","#faa3a4","#e62d69","#f99ff6","#d411cf","#1af9f2","#0ab3c2"]
+      var markerColors= ["#7f9999","#7f7fb2","#cc7f7f","#B2997F","#d6ffff","#b2b2ef", "#7f9999","#7f7fb2","#cc7f7f","#B2997F","#d6ffff","#b2b2ef", "#7f9999","#7f7fb2","#cc7f7f","#B2997F","#d6ffff","#b2b2ef"]
             var geojsonMarkerAM1 = {
         radius: 3,
         fillColor: markerColors[0],
@@ -153,7 +153,7 @@ export default class MapContainer extends Component {
   render() {
 
       return (
-        <Map  center={this.props.sessionLoc}  zoom= {15.5}> 
+        <Map  center={this.props.sessionLoc}  zoom= {15.2}> 
         <Marker position={this.props.sessionLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>
