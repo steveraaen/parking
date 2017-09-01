@@ -27,7 +27,7 @@ render()	{
  <thead>
   <tr>
     <td>Best Times</td>
-    <td>Estimated Spaces</td> 
+    <td>Estimated Spaces (based on four vehicles per sign)</td> 
   </tr>
  </thead>
 	<tbody>

@@ -13,16 +13,16 @@ import pwds from './utils/passwds.js'
        if(this.state.place){
         place = this.state.place
         console.log(place)
-        
-        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place  + "&pretty=1&key=" + pwds.ocage;               
+
+        var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + place  + " NYC&pretty=1&key=" + pwds.ocage;               
+        console.log(queryURL)
         return axios.get(queryURL).then(function(response) {
             if (response.data.results) {
-              console.log(response)
-              this.props.setPlaceLoc([response.data.results[0].geometry.lat, response.data.results[1].geometry.lng,])
+              this.props.setPlaceLoc([response.data.results[0].geometry.lat, response.data.results[0].geometry.lng])
               this.setState({
                 OClat: response.data.results[0].geometry.lat,
-                OClng: response.data.results[1].geometry.lng,
-                placeLoc: [response.data.results[0].geometry.lat, response.data.results[1].geometry.lng,]                
+                OClng: response.data.results[0].geometry.lng,
+                placeLoc: [response.data.results[0].geometry.lat, response.data.results[0].geometry.lng]                
               }) 
  
             } else {
@@ -45,7 +45,7 @@ import pwds from './utils/passwds.js'
   render() {
     return (
         <div >
-        <code>This only works in NYC. The form below isn't finished.</code>
+        <code>Enter an address or attraction in NYC.</code>
           <input className="placeInput" name="place" type="text" value={this.state.place} onChange={this.handleChange} placeholder="Enter a place (e.g., Beacon Theater) or an address in NYC" />
          <input type="button" className="btn btn-xs btn-primary" onClick={this.handleClick} value={"Find Place"} />
         </div>
