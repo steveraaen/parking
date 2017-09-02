@@ -1,41 +1,35 @@
 import React, { Component } from 'react'
 
 export default class Stats extends Component {
+constructor(props) {
+	super(props)
+}
 
 render()	{
-	if(this.props.data) {
-		console.log(this.props.data)
-		var tenSigns = this.props.data
-		var labelArray = []
-		var angleArray = []
-		var colorArray = []
-		var keyArray = []
-		var finalArray = []
-		for(let i = 0; i < tenSigns.length; i++) {
-			labelArray.push(tenSigns[i].label)
-			angleArray.push(tenSigns[i].angle * 4)
-			keyArray.push(`ts_${i}`)
-			colorArray.push(tenSigns[i].color)
+if(this.props.dotColors && this.props.data){
+	console.log("hello")
+      const timeSummary = this.props.data.reduce((count, code) => {
+	      count[code.properties.time] = (count[code.properties.time] || 0) + 1;
+	      return count;
+	  	}, {})
+        var result = Object.keys(timeSummary).map(function(key, idx) {
+            return {
+                y: timeSummary[key],
+                x: String(key)               
+            };
+        });
+        
+       var statArray = []
+       for(let i = 0; i < result.length; i++) {
+       		statArray.push(<div className="row" key={'k_'+[i]}><div className="col-sm-4">{result[i].x}</div><div className="col-sm-4">{result[i].y}</div></div>)
+       	
+       }
+ }
 
-}
-				for(let idx = 0; idx < tenSigns.length; idx++) {
-					finalArray.push(<tr style={{backgroundColor: colorArray[idx]}} key={keyArray[idx]}><td>{labelArray[idx]}</td><td>{angleArray[idx]}</td></tr>)
-				}
-	}
 	return (
-<table className="table" >
- <thead>
-  <tr>
-    <td>Best Times</td>
-    <td>Estimated Spaces (based on four vehicles per sign)</td> 
-  </tr>
- </thead>
-	<tbody>
-{finalArray}
- </tbody>
-
-</table>)
-
+<div className="container">
+	{statArray}
+</div>
+)
 }
-
 }

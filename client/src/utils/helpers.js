@@ -4,8 +4,8 @@ import day from './time.js'
 
 
 var helpers = {
-    getOCData: function(term) {
-        return axios.get('/ocage', {params: {searchTerm: term}})
+    mergeOnceAndDelete: function(field) {
+        return axios.get('/addfield', {params: {field: field}})
     },
     getToday: function(userLoc) {
         

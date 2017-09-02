@@ -1,4 +1,5 @@
 var signcodes = require("../models/Signcodes.js");
+var testsigns = require("../models/Testsigns.js");
         // ----------- get count of each distinct MUTCD code - 
         //        then modified in BBEdit and loaded into mongo -------------
 
@@ -21,3 +22,13 @@ var signcodes = require("../models/Signcodes.js");
             })
         })
     }
+
+        app.get('/addfield', function(req, res) {
+          testsigns.aggregate( [
+            {
+               $addFields: {
+                  "time": properties.T.split('-')[1]
+               }
+            }
+       ] )
+        })
