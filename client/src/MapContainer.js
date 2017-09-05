@@ -16,23 +16,23 @@ export default class MapContainer extends Component {
     }
 
     pointToLayer(feature, latlng) {
-        var markerColors = ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"]
+/*        var markerColors = ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"]
     
-                        var geojsonMarkerOther = {
-                            radius: 3,
-                            fillColor: 'this.state.dotColors[j]',
-                            color: "#000",
-                            weight: 1,
-                            opacity: 1,
-                            fillOpacity: 0.8
-                        };
-        
+          var geojsonMarkerOther = {
+              radius: 3,
+              fillColor: 'this.state.dotColors[j]',
+              color: "#000",
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.8
+          };
+        */
 
         if (feature.properties.style) {
             return L.circleMarker(latlng, feature.properties.style);
-        }   else {
+        }   /*else {
             return L.circleMarker(latlng, geojsonMarkerOther);
-        }
+        }*/
     }
 
     onEachFeature(feature, layer) {
@@ -55,7 +55,7 @@ export default class MapContainer extends Component {
     render() {
 
         return (
-        <Map  center={this.props.sessionLoc}  zoom= {15.2}> 
+        <Map  center={this.props.sessionLoc}  zoom= {14.2}> 
         <Marker position={this.props.sessionLoc} />
           <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/sraaen/cj52ii4g62aqy2so4s6zbl9g9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqMmt2Y3k4djAwNGczM3IzaWU1a3E1eW8ifQ.dTGNBuW1jqOckGIAEDOUZw"/>

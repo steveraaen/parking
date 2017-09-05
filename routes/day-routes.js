@@ -25,7 +25,7 @@ module.exports = function(app) {
                 /*console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(10000);
+        }).limit(750);
     });
     // ---------- Tuesday
     app.get("/tue/:coordinates?", function(req, res) {
@@ -129,7 +129,7 @@ module.exports = function(app) {
     app.get("/sat/:coordinates?", function(req, res) {
         var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
         var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
-        allsigns.find({
+        testsigns.find({
             "properties.T": /SAT/i,
             geometry: {
                 $near: {
@@ -142,12 +142,12 @@ module.exports = function(app) {
             }
         }, function(error, doc) {
             if (error) {
-                console.log(error);
+                console.log('WTF!:::'+ error);
             } else {
                /* console.log(doc)*/
                 res.json(doc);
             }
-        }).limit(1000);
+        }).limit(700);
     });
 }
 

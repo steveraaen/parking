@@ -28,11 +28,17 @@ h2 {
   text-align: center;
   margin-left: 15%;
 }
-.chart div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
+$tan: #FCFFC5;
+$blue: #0EB0D6;
+$grey: #95949D;
+
+body {
+  background: rgb(50,50,50);
+  min-width: 1000px;
 }
+/*.container {
+  width: 900px;
+  height: 750px;
+  border: 1px solid black;
+  margin: 65px auto;
+}*/

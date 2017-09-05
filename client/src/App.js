@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js'
 import PlaceForm from './PlaceForm.js'
 import Stats from './Stats.js'
-import Timeline from './Timeline.js'
+/*import Timeline from './Timeline.js'*/
 import helpers from './utils/helpers.js'
 import day from './utils/time.js'
 
@@ -18,7 +18,6 @@ class App extends Component {
         this.setPlaceLoc = this.setPlaceLoc.bind(this)
     }
     fetchSigns(placeLoc) {
-        console.log(this.state.dotColors)
         if (!this.state.placeLoc) {
             placeLoc = this.state.userLoc
         } else
@@ -26,7 +25,7 @@ class App extends Component {
         this.setState({ sessionLoc: placeLoc })
 
         helpers.getToday(placeLoc).then(function(respo) {
-            console.log(respo)
+
             var keyArr = respo.data.map((k_, idx) => {
                 return 'k_' + idx
             })
@@ -36,10 +35,22 @@ class App extends Component {
                 respo.data[i].properties.time = time
                     test1.push(respo.data[i].properties.time)
                     }
-            
-            var uniqueTimes = Array.from(new Set(test1))
-                this.setState({uniqueTimes: uniqueTimes})
-            for(let j = 0; j < uniqueTimes.length; j++) {
+
+               const timeSummary = respo.data.reduce((count, code) => {
+                  count[code.properties.time] = (count[code.properties.time] || 0) + 1;
+                  return count;
+                }, {})
+              
+                var result = Object.keys(timeSummary).map(function(key, idx) {
+                    return {
+                        y: timeSummary[key],
+                        x: String(key)               
+                    };
+                });
+
+            var timeObjects = []    
+            for(let j = 0; j < result.length; j++) {
+
                         var geojsonMarker = {
                             radius: 3,
                             fillColor: this.state.dotColors[j],
@@ -48,17 +59,29 @@ class App extends Component {
                             opacity: 1,
                             fillOpacity: 0.8
                         };
+                        var timeStyle = {
+                            color: this.state.dotColors[j],
+                            text: result[j].x,
+                            count: result[j].y
+                        }
+                        
+                        
+                        
                 for(let i = 0; i < respo.data.length; i++) {
-                    if(respo.data[i].properties.time.includes(uniqueTimes[j])) {
-                       respo.data[i].properties.style = geojsonMarker 
+                    if(respo.data[i].properties.time.includes(result[j].x)) {
+                       respo.data[i].properties.style = geojsonMarker                      
                     }
                 }
+                timeObjects.push(timeStyle)
             }
+            console.log(timeObjects)
+          
             this.setState({
                 data: respo.data,
-                keys: keyArr
+                keys: keyArr,
+                timeObjects: timeObjects
             })
-            console.log(this.state.data)
+            console.log(this.state)
         }.bind(this))
     }
     componentWillMount() {
@@ -85,17 +108,12 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-                <Timeline userLoc={this.state.userLoc} accuracy={this.state.accuracy} data={this.state.data} />             
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-12">
                 <PlaceForm setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <Stats data={this.state.data} uniqueTimes={this.state.uniqueTimes} dotColors={this.state.dotColors}/>  
+              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
             </div>
           </div>
           <div className="row">

@@ -26,6 +26,20 @@ module.exports = function(app) {
         });
     })
 
+    app.get('/regex', function(req, res)    {
+        testsigns.find({
+            "properties.T": {
+                $regex: /-[0-9]{1,2}\:([0-9]{1,2})?(AM|PM)?/
+            }
+        }, function(error, doc) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    res.json(doc);
+                }
+            }).limit(5000)
+    })
+
     /*    app.get("/allsigns/:coordinates?", function(req, res) {
             allsigns.find({
                 geometry: {
