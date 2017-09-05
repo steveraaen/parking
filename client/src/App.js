@@ -118,7 +118,7 @@ class App extends Component {
     render() {
         return (
       <div className="App">
-      <h2>NYC Street Parking Helper</h2>
+      <h2>NYC Street Parking</h2>
       
         <div className="container">
           <div className="row">
@@ -132,8 +132,13 @@ class App extends Component {
               </div>
           </div>
           <div className="row">
-            <div className="col-sm-12 well">
+
+            <div className="col-sm-1">
+            </div>
+            <div className="col-sm-10 well">
              <MapContainer  data={this.state.data} keys={this.state.keys}   sessionLoc={this.state.sessionLoc} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>
+            </div>
+            <div className="col-sm-1">
             </div>
           </div>
           <div className="row">
