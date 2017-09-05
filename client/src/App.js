@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js'
 import PlaceForm from './PlaceForm.js'
 import Stats from './Stats.js'
-/*import Timeline from './Timeline.js'*/
+import Modal from './Modal.js'
 import helpers from './utils/helpers.js'
 import day from './utils/time.js'
 import moment from 'moment'
@@ -13,7 +13,8 @@ class App extends Component {
         this.state = {
             dotColors: ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"],
             dow: day,
-            placeLoc: null
+            placeLoc: null,
+            isOpen: false 
         }
         this.fetchSigns = this.fetchSigns.bind(this)
         this.setPlaceLoc = this.setPlaceLoc.bind(this)
@@ -72,7 +73,7 @@ class App extends Component {
                         var timeStyle = {
                             color: this.state.dotColors[j],
                             text: result[j].x,
-                            count: result[j].y,
+                            count: result[j].y * 5,
                             time: result[j].tod
                         }
                         
@@ -95,7 +96,9 @@ class App extends Component {
            
         }.bind(this))
     }
+  
     componentWillMount() {
+
         navigator.geolocation.getCurrentPosition(function(pos) {
             console.log(pos)
             this.setState({
@@ -116,6 +119,7 @@ class App extends Component {
         return (
       <div className="App">
       <h2>NYC Street Parking Helper</h2>
+      
         <div className="container">
           <div className="row">
             <div className="col-sm-12 well">
@@ -123,13 +127,12 @@ class App extends Component {
             </div>
           </div>
           <div className="row">
-
+            <div className="col-sm-12 well">
+              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
+              </div>
           </div>
           <div className="row">
-          <div className="col-sm-4 well">
-              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
-            </div>
-            <div className="col-sm-8 well">
+            <div className="col-sm-12 well">
              <MapContainer  data={this.state.data} keys={this.state.keys}   sessionLoc={this.state.sessionLoc} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>
             </div>
           </div>

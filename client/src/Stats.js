@@ -12,10 +12,11 @@ export default class Stats extends Component {
                 },
  
                 chart: {
-                    type: 'bar'
+                    type: 'column',
+                    height: 300
                 },
                 title: {
-                    text: `Looking for places`
+                    text: `Looking for places ...`
                 },
                 legend: false
             }
@@ -52,16 +53,15 @@ export default class Stats extends Component {
                         data: dataArr
                     }],
                     chart: {
-                        type: 'bar',
-                        height: 600
+                        type: 'column',
+                        height: 300
                     },
                     plotOptions: {
-                        bar: {
+                        column: {
                             colorByPoint: true,
                             pointPadding: 0,
-                            pointWidth: 15,
                             borderWidth: 0,
-                            groupPadding: 0.01
+                            grouping:false
                         }
                     },
                     colors: colorArray,
