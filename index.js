@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird')
 const bodyParser = require('body-parser')
-
 const app = express();
 
 
@@ -18,18 +18,15 @@ require("./routes/load-routes.js")(app);
 require("./routes/day-routes.js")(app);
 require("./routes/time-routes.js")(app);
 
-// ------ Connect to the db
-// https://www.mlab.com/databases/heroku_5d4vj37d
-mongoose.connect("mongodb://heroku_5d4vj37d:poartpmu8os1cokg44ajpajpck@ds163679.mlab.com:63679/heroku_5d4vj37d");
-var db = mongoose.connection;
-db.on("error", function(error) {
-    console.log("Mongoose Error: ", error);
-});
-
-db.once("open", function() {
-    console.log("Mongoose connection successful.");
+mongoose.connect('mongodb://heroku_5d4vj37d:poartpmu8os1cokg44ajpajpck@ds163679.mlab.com:63679/heroku_5d4vj37d', {
+  useMongoClient: true,
+}).then(function() {
+	console.log('Mongo connected via mongoose')
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port);
 console.log(`Listening on ${port}`);
-})
+
+
+

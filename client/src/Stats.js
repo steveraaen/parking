@@ -14,7 +14,9 @@ export default class Stats extends Component {
                 chart: {
                     type: 'bar'
                 },
-                title: false,
+                title: {
+                    text: `Looking for places`
+                },
                 legend: false
             }
         }
@@ -24,6 +26,9 @@ export default class Stats extends Component {
 
         var timePoints = nextProps.timeObjects
         if (Array.isArray(timePoints)) {
+
+
+
             var dataArr = []
             var textArr = []
             var colorArray = []
@@ -37,13 +42,15 @@ export default class Stats extends Component {
             }
             this.setState({
                 config: {
+                    title: {
+                        text: `There are ${nextProps.data.length * 5} street parking places within a half mile of you.`
+                    },
                     credits: {
                         enabled: false
                     },
                     series: [{
                         data: dataArr
                     }],
-                    title: false,
                     chart: {
                         type: 'bar',
                         height: 600
@@ -52,7 +59,6 @@ export default class Stats extends Component {
                         bar: {
                             colorByPoint: true,
                             pointPadding: 0,
-                            pointMargin: 2,
                             pointWidth: 15,
                             borderWidth: 0,
                             groupPadding: 0.01
@@ -65,13 +71,14 @@ export default class Stats extends Component {
                     yAxis: {
                         categories: dataArr
                     },
-
+                    
                 }
             })
         }
     }
     render() {
-        return ( < ReactHighcharts config = { this.state.config }
+        return ( 
+            <ReactHighcharts config={this.state.config}
             />
         )
     }
