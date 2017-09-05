@@ -18,6 +18,7 @@ import pwds from './utils/passwds.js'
         console.log(queryURL)
         return axios.get(queryURL).then(function(response) {
             if (response.data.results) {
+              console.log(response)
               this.props.setPlaceLoc([response.data.results[0].geometry.lat, response.data.results[0].geometry.lng])
               this.setState({
                 OClat: response.data.results[0].geometry.lat,
@@ -46,6 +47,7 @@ import pwds from './utils/passwds.js'
     return (
         <div >
           <input className="placeInput" name="place" type="text" value={this.state.place} onChange={this.handleChange} placeholder="e.g., 'Beacon Theater', or an address in NYC"></input>
+         <br/>
          <input type="button" className="btn btn-xs btn-primary" onClick={this.handleClick} value={"Find Place"} />
         </div>
 

@@ -46,6 +46,7 @@ export default class Stats extends Component {
                     series: [{
                         data: dataArr
                     }],
+                    title: false,
                     chart: {
                         type: 'bar',
                         height: 600
@@ -53,7 +54,10 @@ export default class Stats extends Component {
                     plotOptions: {
                         bar: {
                             colorByPoint: true,
-                            height: 10
+                            pointPadding: 0,
+                            pointWidth: 15,
+                            borderWidth: 0,
+                            groupPadding: 0.01
                         }
                     },
                     colors: colorArray,

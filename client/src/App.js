@@ -119,17 +119,17 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 well">
-                <PlaceForm setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
+                <PlaceForm sessionLoc={this.state.sessionLoc} setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
             </div>
           </div>
           <div className="row">
 
           </div>
           <div className="row">
-          <div className="col-sm-3 well">
+          <div className="col-sm-4 well">
               <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
             </div>
-            <div className="col-sm-9 well">
+            <div className="col-sm-8 well">
              <MapContainer  data={this.state.data} keys={this.state.keys}   sessionLoc={this.state.sessionLoc} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>
             </div>
           </div>
