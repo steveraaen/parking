@@ -24,9 +24,6 @@ export default class Stats extends Component {
 
         var timePoints = nextProps.timeObjects
         if (Array.isArray(timePoints)) {
-
-
-
             var dataArr = []
             var textArr = []
             var colorArray = []
@@ -55,6 +52,7 @@ export default class Stats extends Component {
                         bar: {
                             colorByPoint: true,
                             pointPadding: 0,
+                            pointMargin: 2,
                             pointWidth: 15,
                             borderWidth: 0,
                             groupPadding: 0.01
