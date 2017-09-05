@@ -5,6 +5,7 @@ import Stats from './Stats.js'
 /*import Timeline from './Timeline.js'*/
 import helpers from './utils/helpers.js'
 import day from './utils/time.js'
+import moment from 'moment'
 
 class App extends Component {
     constructor(props) {
@@ -40,14 +41,23 @@ class App extends Component {
                   count[code.properties.time] = (count[code.properties.time] || 0) + 1;
                   return count;
                 }, {})
-              
+               
+
                 var result = Object.keys(timeSummary).map(function(key, idx) {
+                    var arrSplit = key.split(' ')
+                    var t = moment(arrSplit[0], 'HH:mm A' )
+                    
+                   
+
+
                     return {
                         y: timeSummary[key],
-                        x: String(key)               
+                        x: String(key),
+                        tod: t,
+                        days: arrSplit              
                     };
                 });
-
+                
             var timeObjects = []    
             for(let j = 0; j < result.length; j++) {
 
@@ -62,7 +72,8 @@ class App extends Component {
                         var timeStyle = {
                             color: this.state.dotColors[j],
                             text: result[j].x,
-                            count: result[j].y
+                            count: result[j].y,
+                            time: result[j].tod
                         }
                         
                         
@@ -74,14 +85,14 @@ class App extends Component {
                 }
                 timeObjects.push(timeStyle)
             }
-            console.log(timeObjects)
-          
+          timeObjects.sort(function(a,b) {return (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0);} );
+            
             this.setState({
                 data: respo.data,
                 keys: keyArr,
                 timeObjects: timeObjects
             })
-            console.log(this.state)
+           
         }.bind(this))
     }
     componentWillMount() {
@@ -104,7 +115,7 @@ class App extends Component {
     render() {
         return (
       <div className="App">
-      <h2>ASP Turnover</h2><code className="center"></code>
+      <h2>NYC Street Parking Helper</h2>
         <div className="container">
           <div className="row">
             <div className="col-sm-12 well">
@@ -112,12 +123,13 @@ class App extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-12 well">
-              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
-            </div>
+
           </div>
           <div className="row">
-            <div className="col-sm-12 well">
+          <div className="col-sm-3 well">
+              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
+            </div>
+            <div className="col-sm-9 well">
              <MapContainer  data={this.state.data} keys={this.state.keys}   sessionLoc={this.state.sessionLoc} placeLoc={this.state.placeLoc} userLoc={this.state.userLoc}/>
             </div>
           </div>

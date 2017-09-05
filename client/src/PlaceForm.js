@@ -45,7 +45,7 @@ import pwds from './utils/passwds.js'
   render() {
     return (
         <div >
-          <input className="placeInput" name="place" type="text" value={this.state.place} onChange={this.handleChange} placeholder="Enter a place (e.g., Beacon Theater) or an address in NYC" />
+          <input className="placeInput" name="place" type="text" value={this.state.place} onChange={this.handleChange} placeholder="e.g., 'Beacon Theater', or an address in NYC"></input>
          <input type="button" className="btn btn-xs btn-primary" onClick={this.handleClick} value={"Find Place"} />
         </div>
 

@@ -7,7 +7,7 @@ module.exports = function(app) {
     app.get("/mon/:coordinates?", function(req, res) {
         var lat = parseFloat(req.query.coordinates[1]).toFixed(6)
         var lng = parseFloat(req.query.coordinates[0]).toFixed(6)
-        allsigns.find({
+        testsigns.find({
             "properties.T": /MON/i,
             geometry: {
                 $near: {
