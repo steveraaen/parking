@@ -107,12 +107,12 @@ class App extends Component {
       <h2>ASP Turnover</h2><code className="center"></code>
         <div className="container">
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-sm-12 well">
                 <PlaceForm setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-sm-12 well">
               <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
             </div>
           </div>

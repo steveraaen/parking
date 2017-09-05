@@ -19,7 +19,10 @@ export default class Stats extends Component {
                 chart: {
 						        type: 'column',
 						        height: 200
-						    }
+						    },
+						    title: {
+        					text: ""
+    }
             }
         }
     }
@@ -45,8 +48,7 @@ export default class Stats extends Component {
 	            		}],
 	            		chart: {
 						        type: 'column',
-						        height: 150
-						    }
+						        height: 250
 	            	},
                 xAxis: {
                     categories: textArr
@@ -54,7 +56,10 @@ export default class Stats extends Component {
 	            	yAxis: {
 	            		categories: dataArr
 	            	},
-
+						    title: {
+        					text: `There are ${nextProps.data.length} street parking spaces within a half mile `
+    }
+}
 	           })
 					}    
     }
