@@ -36,7 +36,7 @@ import pwds from './utils/passwds.js'
         }
     }
   handleChange(event) {
-    this.setState({place: event.target.value});
+    this.setState({place: event.target.value.trim()});
   }
   handleClick() { 
   this.getOCData()
