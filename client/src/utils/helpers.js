@@ -1,6 +1,6 @@
 import axios from 'axios'
-/*import day from './time.js'*/
-var day = "MON"
+import day from './time.js'
+
 
 
 var helpers = {
