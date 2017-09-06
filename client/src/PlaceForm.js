@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import helpers from './utils/helpers'
 import pwds from './utils/passwds.js'
 
  export default class PlaceForm extends Component {
@@ -9,6 +10,7 @@ import pwds from './utils/passwds.js'
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
+
       getOCData(place) {
        if(this.state.place){
         place = this.state.place
@@ -36,7 +38,7 @@ import pwds from './utils/passwds.js'
         }
     }
   handleChange(event) {
-    this.setState({place: event.target.value.trim()});
+    this.setState({place: event.target.value});
   }
   handleClick() { 
   this.getOCData()

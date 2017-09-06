@@ -49,8 +49,6 @@ class App extends Component {
                     var t = moment(arrSplit[0], 'HH:mm A' )
                     
                    
-
-
                     return {
                         y: timeSummary[key],
                         x: String(key),
@@ -76,9 +74,7 @@ class App extends Component {
                             count: result[j].y * 5,
                             time: result[j].tod
                         }
-                        
-                        
-                        
+                                            
                 for(let i = 0; i < respo.data.length; i++) {
                     if(respo.data[i].properties.time.includes(result[j].x)) {
                        respo.data[i].properties.style = geojsonMarker                      
@@ -93,10 +89,10 @@ class App extends Component {
                 keys: keyArr,
                 timeObjects: timeObjects
             })
-           
+          
         }.bind(this))
+        console.log(this.state)
     }
-  
     componentWillMount() {
 
         navigator.geolocation.getCurrentPosition(function(pos) {
@@ -108,14 +104,18 @@ class App extends Component {
             helpers.getCurrentHood(this.state.userLoc).then(function(response) {
                 this.setState({ curHood: response.data })
                 this.fetchSigns(this.state.userLoc)
+
             }.bind(this))
         }.bind(this))
     }
     setPlaceLoc(place) {
         this.setState({ placeLoc: place })
     }
+    componentDidMount(){
 
+    }
     render() {
+
         return (
       <div className="App">
       <h2>NYC Street Parking</h2>
@@ -123,12 +123,12 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 well">
-                <PlaceForm sessionLoc={this.state.sessionLoc} setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
+                <PlaceForm sessionLoc={this.state.sessionLoc} data={this.state.data} setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12 well">
-              <Stats data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
+              <Stats sessionLoc={this.state.sessionLoc} data={this.state.data} timeObjects={this.state.timeObjects} dotColors={this.state.dotColors}/>  
               </div>
           </div>
           <div className="row">

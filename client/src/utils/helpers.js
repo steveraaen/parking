@@ -34,10 +34,6 @@ var helpers = {
     initGeoData: function() {
         return axios.get('/allsigns')
     },
-    /*    initAutoGeoData: function(userLoc) {
-            console.log(userLoc)
-            return axios.get('/allsigns', { params: { coordinates: userLoc } })
-        },*/
     getAllHoods: function() {
         return axios.get('/geojhoods')
     },
