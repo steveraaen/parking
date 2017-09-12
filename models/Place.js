@@ -1,15 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var PlaceSchema = new Schema({
-
-    annotations: {},
-    bounds: {},
-    components: {},
-    confidence: Number,
-    formatted: String,
-    geometry: {}
+var PlacesSchema = new Schema({
+body: {}
 });
 
-var Place = mongoose.model("Place", PlaceSchema);
-module.exports = Place;
+var Places = mongoose.model("Places", PlacesSchema);
+module.exports = Places;

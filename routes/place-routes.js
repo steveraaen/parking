@@ -1,10 +1,24 @@
 var Hood = require("../models/Hoods.js");
-var Place = require("../models/Place.js");
+var Places = require("../models/Place.js");
 var allsigns = require("../models/Allsigns.js");
 var testsigns = require("../models/Testsigns.js");
 
 
 module.exports = function(app) {
+
+        app.post('/metrics', function(req, res) {
+            console.log(req.body)
+
+            var place = new Places(req.body)
+            req.body = {}
+            console.log(place)
+            place.save(function (err) {
+              if (err) console.log(err);
+             console.log('saved')
+            })
+        })
+
+
 
         app.get("/testsigns", function(req, res) {
         allsigns.find({
@@ -50,11 +64,11 @@ module.exports = function(app) {
 
     // ---------------------------------
     app.get('/userloc/:coordinates?', function(request, response){
-        console.log(parseFloat(request.query.coordinates[0]).toFixed(6));
+     /*   console.log(parseFloat(request.query.coordinates[0]).toFixed(6));*/
        
         var lat = parseFloat(request.query.coordinates[0]).toFixed(6)
         var lng = parseFloat(request.query.coordinates[1]).toFixed(6)
-        console.log(lng, lat)
+       /* console.log(lng, lat)*/
             Hood.findOne({
         geometry: {
             $geoIntersects: {
@@ -68,7 +82,7 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc);
+                /*console.log(doc);*/
                 response.json(doc);
             }
         });

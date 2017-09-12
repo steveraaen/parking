@@ -1,9 +1,12 @@
 import axios from 'axios'
-import day from './time.js'
-
+/*import day from './time.js'*/
+var day = "MON"
 
 
 var helpers = {
+
+
+
     mergeOnceAndDelete: function(field) {
         return axios.get('/addfield', {params: {field: field}})
     },

@@ -16,6 +16,7 @@ export default class MapContainer extends Component {
     }
 
     pointToLayer(feature, latlng) {
+        
         var markerColors = ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"]
     
                         var geojsonMarkerOther = {
@@ -39,6 +40,7 @@ export default class MapContainer extends Component {
         if (feature.properties && feature.properties.T) {
             layer.bindTooltip(feature.properties.T);
         }
+
     }
     componentDidMount() {
 
@@ -48,9 +50,7 @@ export default class MapContainer extends Component {
                     console.log(this.props.userLoc)*/
 
     }
-    chooseMap() {
 
-    }
 
     render() {
 

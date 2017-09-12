@@ -10,7 +10,7 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc);
+                /*console.log(doc);*/
                 res.json(doc);
             }
         })
@@ -20,7 +20,7 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc);
+                /*console.log(doc);*/
                 res.json(doc);
             }
         });
@@ -62,7 +62,7 @@ module.exports = function(app) {
             if (error) {
                 console.log(error);
             } else {
-                console.log(doc)
+                /*console.log(doc)*/
                 res.json(doc);
             }
         });
@@ -74,7 +74,7 @@ module.exports = function(app) {
                 console.log(error);
             } else {
 
-                console.log(doc[0])
+            /*    console.log(doc[0])*/
                 res.json(doc[0]);
             }
         });
