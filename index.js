@@ -28,8 +28,4 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 console.log(`Listening on ${port}`);
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 69db8b2023972553e7b87a7d232b3c1e57aef1cb

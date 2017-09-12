@@ -17,7 +17,7 @@ class App extends Component {
         }
         this.fetchSigns = this.fetchSigns.bind(this)
         this.setPlaceLoc = this.setPlaceLoc.bind(this)
-        this.clearData = this.clearData.bind(this)
+       
     }
     fetchSigns(placeLoc) {
 

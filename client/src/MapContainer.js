@@ -16,12 +16,9 @@ export default class MapContainer extends Component {
     }
 
     pointToLayer(feature, latlng) {
-<<<<<<< HEAD
-        
+
         var markerColors = ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"]
-=======
-/*        var markerColors = ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"]
->>>>>>> 69db8b2023972553e7b87a7d232b3c1e57aef1cb
+
     
           var geojsonMarkerOther = {
               radius: 3,
@@ -31,13 +28,13 @@ export default class MapContainer extends Component {
               opacity: 1,
               fillOpacity: 0.8
           };
-        */
+        
 
         if (feature.properties.style) {
             return L.circleMarker(latlng, feature.properties.style);
-        }   /*else {
+        }   else {
             return L.circleMarker(latlng, geojsonMarkerOther);
-        }*/
+        }
     }
 
     onEachFeature(feature, layer) {
