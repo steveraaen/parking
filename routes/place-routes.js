@@ -6,6 +6,7 @@ var testsigns = require("../models/Testsigns.js");
 
 module.exports = function(app) {
 
+<<<<<<< HEAD
         app.post('/metrics', function(req, res) {
             console.log(req.body)
 
@@ -69,6 +70,14 @@ module.exports = function(app) {
         var lat = parseFloat(request.query.coordinates[0]).toFixed(6)
         var lng = parseFloat(request.query.coordinates[1]).toFixed(6)
        /* console.log(lng, lat)*/
+=======
+    app.get('/userloc/:coordinates?', function(request, response){
+       /* console.log(parseFloat(request.query.coordinates[0]).toFixed(6));*/
+       
+        var lat = parseFloat(request.query.coordinates[0]).toFixed(6)
+        var lng = parseFloat(request.query.coordinates[1]).toFixed(6)
+        /*console.log(lng, lat)*/
+>>>>>>> 69db8b2023972553e7b87a7d232b3c1e57aef1cb
             Hood.findOne({
         geometry: {
             $geoIntersects: {

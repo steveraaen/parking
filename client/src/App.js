@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js'
 import PlaceForm from './PlaceForm.js'
 import Stats from './Stats.js'
+
 import helpers from './utils/helpers.js'
 import day from './utils/time.js'
 import moment from 'moment'
@@ -13,14 +14,13 @@ class App extends Component {
             dotColors: ["#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef", "#7f9999", "#7f7fb2", "#cc7f7f", "#B2997F", "#d6ffff", "#b2b2ef"],
             dow: day,
             placeLoc: null,
-            isOpen: false
         }
         this.fetchSigns = this.fetchSigns.bind(this)
         this.setPlaceLoc = this.setPlaceLoc.bind(this)
         this.clearData = this.clearData.bind(this)
     }
     fetchSigns(placeLoc) {
-        
+
         if (!this.state.placeLoc) {
             placeLoc = this.state.userLoc
         } else
@@ -112,11 +112,12 @@ class App extends Component {
     setPlaceLoc(place) {
         this.setState({ placeLoc: place })
     }
-    clearData(data) {
-        this.setState({ data: data })
+
+    componentDidMount(){
+
     }
     render() {
-   
+
         return (
       <div className="App">
       <h2>NYC Street Parking</h2>
@@ -124,7 +125,8 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 well">
-                <PlaceForm clearData={this.state.clearData} sessionLoc={this.state.sessionLoc} data={this.state.data} setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
+
+                <PlaceForm sessionLoc={this.state.sessionLoc} data={this.state.data} setPlaceLoc={this.setPlaceLoc} fetchSigns={this.fetchSigns} />             
             </div>
           </div>
           <div className="row">

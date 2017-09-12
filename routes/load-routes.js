@@ -2,7 +2,9 @@ var Hood = require("../models/Hoods.js");
 var allsigns = require("../models/Allsigns.js");
 var geojhoods = require("../models/GeoJHoods.js");
 var testsigns = require("../models/Testsigns.js");
+var Places = require("../models/Place.js");
 module.exports = function(app) {
+
 
     // ---------------------------------------------------
     app.get('/oddstats/:coordinates?', function(req, res) {
@@ -24,6 +26,20 @@ module.exports = function(app) {
                 res.json(doc);
             }
         });
+    })
+
+    app.get('/regex', function(req, res)    {
+        testsigns.find({
+            "properties.T": {
+                $regex: /-[0-9]{1,2}\:([0-9]{1,2})?(AM|PM)?/
+            }
+        }, function(error, doc) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    res.json(doc);
+                }
+            }).limit(5000)
     })
 
     /*    app.get("/allsigns/:coordinates?", function(req, res) {

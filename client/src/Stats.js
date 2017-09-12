@@ -10,7 +10,8 @@ export default class Stats extends Component {
             config: {
                 credits: {
                     enabled: false
-                }, 
+                },
+ 
                 chart: {
                     type: 'column',
                     height: 300
@@ -22,8 +23,6 @@ export default class Stats extends Component {
             }
         }
     }
-
-
     componentWillReceiveProps(nextProps) {
         var timePoints = nextProps.timeObjects
         if (Array.isArray(timePoints)) {
@@ -33,6 +32,7 @@ export default class Stats extends Component {
             var timeArray = []
             for (let i = 0; i < timePoints.length; i++) {
 
+
                 dataArr.push(timePoints[i].count)
                 textArr.push(timePoints[i].text.split(' ')[0])
                 colorArray.push(timePoints[i].color)
@@ -41,6 +41,7 @@ export default class Stats extends Component {
             if(!nextProps.data.length){
                 nextProps.data.length = 0
             }
+
             this.setState({
                 config: {
                     title: {
@@ -75,8 +76,6 @@ export default class Stats extends Component {
                 }
             })
         }
-                      
-
     }
     render() {
         return ( 
